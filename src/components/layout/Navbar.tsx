@@ -30,7 +30,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center" onClick={() => setMobileOpen(false)}>
           <Image
             src="/logos/clinica.png"
-            alt="Ser Humano · Salud Integral"
+            alt="Clínica Ser Humano"
             width={150}
             height={55}
             priority

@@ -1,6 +1,6 @@
-# Clínica Ser Humano Salud Integral — Sitio Web Oficial
+# Clínica Ser Humano — Sitio Web Oficial
 
-Sitio web institucional de **Clínica Ser Humano Salud Integral**, desarrollado con Next.js 14 App Router, Tailwind CSS v3 y Framer Motion. Incluye páginas de servicios, blog con artículos médicos, carrusel de testimonios, formulario de contacto con SMTP, datos estructurados JSON-LD y analíticas con GTM + GA4.
+Sitio web institucional de **Clínica Ser Humano**, desarrollado con Next.js 14 App Router, Tailwind CSS v3 y Framer Motion. Incluye páginas de servicios, blog con artículos médicos, carrusel de testimonios, formulario de contacto con SMTP, datos estructurados JSON-LD y analíticas con GTM + GA4.
 
 **Producción:** [clinicaserhumano.ec](https://clinicaserhumano.ec)  
 **Stack:** Next.js 14 · TypeScript · Tailwind CSS v3 · Framer Motion · Nodemailer  
@@ -369,6 +369,6 @@ Generados automáticamente por Next.js:
 
 ## Créditos
 
-Desarrollado por [Jorge Andres](https://github.com/jorgeandresur18) para **Clínica Ser Humano Salud Integral**, Guayaquil, Ecuador.
+Desarrollado por [Jorge Andres](https://github.com/jorgeandresur18) para **Clínica Ser Humano**, Guayaquil, Ecuador.
 
-© 2026 Clínica Ser Humano Salud Integral. Todos los derechos reservados.
+© 2026 Clínica Ser Humano. Todos los derechos reservados.

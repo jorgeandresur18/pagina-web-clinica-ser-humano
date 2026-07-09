@@ -12,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/servicios/neurolab`,                  priority: 0.9,  changeFrequency: "monthly" },
     { url: `${BASE}/servicios/nadia-donadonibus`,         priority: 0.9,  changeFrequency: "monthly" },
     { url: `${BASE}/servicios/programa-ser`,              priority: 0.9,  changeFrequency: "monthly" },
+    { url: `${BASE}/politica-de-privacidad`,              priority: 0.3,  changeFrequency: "yearly"  },
+    { url: `${BASE}/terminos-y-condiciones`,              priority: 0.3,  changeFrequency: "yearly"  },
   ] satisfies MetadataRoute.Sitemap;
 
   const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({

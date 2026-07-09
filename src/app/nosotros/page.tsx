@@ -6,7 +6,7 @@ import { servicePageSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
-  title: "Nosotros | Clínica Ser Humano Salud Integral",
+  title: "Nosotros | Clínica Ser Humano",
   description: "Somos una institución con más de 30 años de experiencia en salud integral. Conoce nuestro equipo y enfoque humanista.",
   path: "/nosotros",
   image: `${BASE_URL}/fotos/nosotros-hero.png`,
@@ -50,7 +50,7 @@ export default function NosotrosPage() {
   return (
     <>
       <JsonLd data={servicePageSchema({
-        name: "Nosotros · Clínica Ser Humano Salud Integral",
+        name: "Nosotros · Clínica Ser Humano",
         description: "Institución con más de 30 años de experiencia en salud integral. Equipo multidisciplinario en Guayaquil, Ecuador.",
         url: "https://clinicaserhumano.ec/nosotros",
         image: "https://clinicaserhumano.ec/fotos/nosotros-hero.png",

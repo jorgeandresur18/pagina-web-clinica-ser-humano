@@ -1,5 +1,5 @@
 export const BASE_URL = "https://clinicaserhumano.ec";
-export const SITE_NAME = "Ser Humano Salud Integral";
+export const SITE_NAME = "Clínica Ser Humano";
 export const DEFAULT_OG_IMAGE = `${BASE_URL}/fotos/nosotros-hero.png`;
 
 export function buildMeta({

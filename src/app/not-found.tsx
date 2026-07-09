@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, Home, Phone } from "lucide-react";
 
 export const metadata = {
-  title: "Página no encontrada | Ser Humano Salud Integral",
+  title: "Página no encontrada | Clínica Ser Humano",
 };
 
 export default function NotFound() {

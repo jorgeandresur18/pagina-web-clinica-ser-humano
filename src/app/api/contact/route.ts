@@ -26,7 +26,7 @@ function buildEmail(nombre: string, telefono: string, mensaje: string) {
         <tr>
           <td style="background:#ff6b12;border-radius:16px 16px 0 0;padding:28px 32px;text-align:center">
             <p style="margin:0;color:#fff;font-size:22px;font-weight:700;letter-spacing:-0.3px">
-              Ser Humano · Salud Integral
+              Clínica Ser Humano
             </p>
             <p style="margin:6px 0 0;color:rgba(255,255,255,0.85);font-size:13px">
               Nuevo mensaje desde serhumano.org
@@ -85,7 +85,7 @@ function buildEmail(nombre: string, telefono: string, mensaje: string) {
         <tr>
           <td style="padding:20px 0;text-align:center">
             <p style="margin:0;font-size:11px;color:#aaa">
-              Clínica Ser Humano Salud Integral · Guayaquil, Ecuador<br>
+              Clínica Clínica Ser Humano · Guayaquil, Ecuador<br>
               Este correo fue generado automáticamente desde serhumano.org
             </p>
           </td>

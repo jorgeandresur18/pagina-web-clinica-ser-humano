@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
   const post = getPost(params.slug);
   if (!post) return {};
   return buildMeta({
-    title: `${post.title} | Ser Humano Salud Integral`,
+    title: `${post.title} | Clínica Ser Humano`,
     description: post.excerpt,
     path: `/novedades/${post.slug}`,
     image: `${BASE_URL}${post.image}`,

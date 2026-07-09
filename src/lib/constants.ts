@@ -108,6 +108,13 @@ export const UNIVERSIDADES = [
     height: 1200,
     displayH: 56,  // 1.5:1 → renders ~84×56px
   },
+  {
+    nombre: "Universidad Internacional de La Rioja (UNIR)",
+    logo: "/logos/universidadunir.png",
+    width: 900,
+    height: 255,
+    displayH: 40,  // wide 3.53:1 → renders ~141×40px
+  },
 ];
 
 export const EQUIPO = [

@@ -8,7 +8,7 @@ import { servicePageSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
-  title: "NeuroLab · Estimulación Cognitiva Sensorial | Ser Humano Salud Integral",
+  title: "NeuroLab · Estimulación Cognitiva Sensorial | Clínica Ser Humano",
   description: "Programa único de estimulación neurocognitiva sensorial en Ecuador. Entrena tu mente, fortalece tu memoria. Modalidades presencial y remoto.",
   path: "/servicios/neurolab",
   image: `${BASE_URL}/neurolab/hero.jpg`,

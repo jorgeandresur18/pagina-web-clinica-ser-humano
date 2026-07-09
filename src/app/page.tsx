@@ -236,7 +236,7 @@ export default function Home() {
       <section className="relative flex min-h-[620px] items-center md:min-h-[680px]">
         <Image
           src="/fotos/hero-clinica.png"
-          alt="Clínica Ser Humano Salud Integral"
+          alt="Clínica Ser Humano"
           fill
           priority
           className="object-cover object-center lg:object-[center_35%]"
@@ -503,7 +503,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN 6 — CONVENIOS CON UNIVERSIDADES */}
+      {/* SECCIÓN 6 — UNIVERSIDADES (espacio de pasantías) */}
       <section className="bg-brand-base">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <motion.div {...fadeUp} className="text-center">
@@ -511,7 +511,7 @@ export default function Home() {
               Convenios con universidades
             </h2>
             <p className="mt-3 text-sm text-brand-gray-dark/70">
-              Formamos parte de redes académicas en salud mental y neurociencias.
+              Instituciones con las que hemos colaborado a lo largo de nuestra trayectoria.
             </p>
           </motion.div>
 

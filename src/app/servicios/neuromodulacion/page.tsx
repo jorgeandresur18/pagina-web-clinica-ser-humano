@@ -11,7 +11,7 @@ import { servicePageSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
-  title: "Neuroni · Neuromodulación No Invasiva | Ser Humano Salud Integral",
+  title: "Neuroni · Neuromodulación No Invasiva | Clínica Ser Humano",
   description: "Regula tu sistema nervioso sin psicofármacos. Neuromodulación no invasiva con respaldo clínico en Guayaquil, Ecuador.",
   path: "/servicios/neuromodulacion",
   image: `${BASE_URL}/fotos/neuroni-hero.png`,

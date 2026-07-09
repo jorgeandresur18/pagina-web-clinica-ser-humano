@@ -5,7 +5,7 @@ import { BLOG_POSTS } from "@/lib/blog";
 import { buildMeta } from "@/lib/seo";
 
 export const metadata = buildMeta({
-  title: "Novedades | Clínica Ser Humano Salud Integral",
+  title: "Novedades | Clínica Ser Humano",
   description: "Artículos y novedades sobre salud mental, neurociencia y bienestar integral.",
   path: "/novedades",
 });

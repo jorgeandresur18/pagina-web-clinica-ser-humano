@@ -8,7 +8,7 @@ import { servicePageSchema, physicianSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
-  title: "Dra. Nadia Donadonibus · Psicoterapeuta | Ser Humano Salud Integral",
+  title: "Dra. Nadia Donadonibus · Psicoterapeuta | Clínica Ser Humano",
   description: "Psicoterapeuta y psicoanalista con más de 40 años de experiencia en Italia y Ecuador. Psicoterapia individual, familiar y de pareja en Guayaquil.",
   path: "/servicios/nadia-donadonibus",
   image: `${BASE_URL}/nadia/nadia-hero.jpeg`,

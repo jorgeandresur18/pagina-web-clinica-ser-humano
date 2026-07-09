@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { MapPin, Phone } from "lucide-react";
 import { PHONE_NUMBER, CLINIC_MAPS_EMBED } from "@/lib/constants";
 
@@ -22,6 +23,7 @@ interface Errors {
   nombre?: string;
   telefono?: string;
   mensaje?: string;
+  consentimiento?: string;
 }
 
 const inputClass =
@@ -31,12 +33,13 @@ const inputErrorClass =
   "w-full rounded-xl border border-red-400 bg-red-50 px-4 py-3 text-sm text-brand-gray-dark placeholder:text-brand-gray-dark/40 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-400";
 
 export default function ContactSection() {
-  const [nombre, setNombre]       = useState("");
-  const [codigo, setCodigo]       = useState("+593");
-  const [telefono, setTelefono]   = useState("");
-  const [mensaje, setMensaje]     = useState("");
-  const [status, setStatus]       = useState<Status>("idle");
-  const [errors, setErrors]       = useState<Errors>({});
+  const [nombre, setNombre]           = useState("");
+  const [codigo, setCodigo]           = useState("+593");
+  const [telefono, setTelefono]       = useState("");
+  const [mensaje, setMensaje]         = useState("");
+  const [consentimiento, setConsent]  = useState(false);
+  const [status, setStatus]           = useState<Status>("idle");
+  const [errors, setErrors]           = useState<Errors>({});
 
   const validate = (): boolean => {
     const e: Errors = {};
@@ -47,6 +50,8 @@ export default function ContactSection() {
       e.telefono = "Ingresa un número de teléfono válido.";
     if (!mensaje.trim() || mensaje.trim().length < 5)
       e.mensaje = "Escribe un mensaje de al menos 5 caracteres.";
+    if (!consentimiento)
+      e.consentimiento = "Debes aceptar la política de protección de datos para continuar.";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -68,7 +73,7 @@ export default function ContactSection() {
       if (!res.ok) throw new Error();
       setStatus("ok");
       setNombre(""); setTelefono(""); setMensaje("");
-      setCodigo("+593"); setErrors({});
+      setCodigo("+593"); setConsent(false); setErrors({});
     } catch {
       setStatus("error");
     }
@@ -173,6 +178,31 @@ export default function ContactSection() {
                   />
                   {errors.mensaje && (
                     <p className="mt-1 text-xs text-red-500">{errors.mensaje}</p>
+                  )}
+                </div>
+
+                {/* Consentimiento LOPDP */}
+                <div>
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={consentimiento}
+                      onChange={(e) => {
+                        setConsent(e.target.checked);
+                        setErrors(p => ({ ...p, consentimiento: undefined }));
+                      }}
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-brand-orange"
+                    />
+                    <span className="text-xs leading-relaxed text-brand-gray-dark/70">
+                      He leído y acepto la{" "}
+                      <Link href="/politica-de-privacidad" className="text-brand-orange underline underline-offset-2 hover:text-brand-orange/80" target="_blank">
+                        Política de Protección de Datos Personales
+                      </Link>{" "}
+                      y autorizo el tratamiento de mis datos para atender mi solicitud.
+                    </span>
+                  </label>
+                  {errors.consentimiento && (
+                    <p className="mt-1.5 text-xs text-red-500">{errors.consentimiento}</p>
                   )}
                 </div>
 

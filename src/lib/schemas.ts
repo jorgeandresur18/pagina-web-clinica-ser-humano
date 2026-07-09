@@ -4,7 +4,7 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalClinic",
   "@id": `${BASE}/#clinic`,
-  name: "Clínica Ser Humano Salud Integral",
+  name: "Clínica Ser Humano",
   alternateName: "Instituto Clínico Ser Humano",
   url: BASE,
   logo: `${BASE}/logos/serhumano.png`,
@@ -38,7 +38,7 @@ export const websiteSchema = {
   "@type": "WebSite",
   "@id": `${BASE}/#website`,
   url: BASE,
-  name: "Ser Humano Salud Integral",
+  name: "Clínica Ser Humano",
   publisher: { "@id": `${BASE}/#clinic` },
   inLanguage: "es-EC",
 };
@@ -121,7 +121,7 @@ export function articleSchema({
     publisher: { "@id": `${BASE}/#clinic` },
     author: {
       "@type": "Organization",
-      name: "Clínica Ser Humano Salud Integral",
+      name: "Clínica Ser Humano",
     },
     isPartOf: { "@id": `${BASE}/#website` },
   };

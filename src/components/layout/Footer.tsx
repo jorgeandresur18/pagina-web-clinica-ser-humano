@@ -31,7 +31,7 @@ export default function Footer() {
           <div>
             <Image
               src="/logos/clinica2.png"
-              alt="Ser Humano · Salud Integral"
+              alt="Clínica Ser Humano"
               width={170}
               height={63}
               className="h-12 w-auto"
@@ -98,8 +98,17 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/15 pt-6 text-center text-xs text-white/60">
-          © 2026 Clínica Ser Humano. Todos los derechos reservados.
+        <div className="mt-10 border-t border-white/15 pt-6 flex flex-col items-center gap-2 text-center text-xs text-white/60">
+          <div className="flex gap-4">
+            <Link href="/politica-de-privacidad" className="hover:text-white/90 underline underline-offset-2">
+              Política de Privacidad
+            </Link>
+            <span aria-hidden="true">·</span>
+            <Link href="/terminos-y-condiciones" className="hover:text-white/90 underline underline-offset-2">
+              Términos y Condiciones
+            </Link>
+          </div>
+          © 2026 Fundación Ser Humano SERUNO. Todos los derechos reservados.
         </div>
       </div>
     </footer>
