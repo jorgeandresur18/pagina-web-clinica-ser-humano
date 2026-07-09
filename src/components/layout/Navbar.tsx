@@ -54,10 +54,13 @@ export default function Navbar() {
             onMouseEnter={() => setServicesOpen(true)}
             onMouseLeave={() => setServicesOpen(false)}
           >
-            <button className="flex items-center gap-1 text-sm font-medium text-brand-gray-dark transition-colors hover:text-brand-orange">
+            <Link
+              href="/servicios"
+              className="flex items-center gap-1 text-sm font-medium text-brand-gray-dark transition-colors hover:text-brand-orange"
+            >
               Servicios
               <ChevronDown size={16} className={`transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
-            </button>
+            </Link>
             <AnimatePresence>
               {servicesOpen && (
                 <motion.div
@@ -76,6 +79,14 @@ export default function Navbar() {
                       {marca.nombre}
                     </Link>
                   ))}
+                  <div className="mt-1 border-t border-brand-base pt-1">
+                    <Link
+                      href="/servicios"
+                      className="block rounded-lg px-4 py-2.5 text-xs font-semibold text-brand-orange transition-colors hover:bg-brand-base"
+                    >
+                      Ver todos los servicios →
+                    </Link>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -128,9 +139,13 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <p className="px-2 pt-2 text-xs font-medium uppercase tracking-wide text-brand-gray-light">
+              <Link
+                href="/servicios"
+                onClick={() => setMobileOpen(false)}
+                className="px-2 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-brand-orange hover:underline"
+              >
                 Servicios
-              </p>
+              </Link>
               {SUBMARCAS.map((marca) => (
                 <Link
                   key={marca.slug}

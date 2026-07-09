@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE,                                          priority: 1.0,  changeFrequency: "weekly"  },
     { url: `${BASE}/nosotros`,                            priority: 0.8,  changeFrequency: "monthly" },
     { url: `${BASE}/novedades`,                           priority: 0.8,  changeFrequency: "weekly"  },
+    { url: `${BASE}/servicios`,                               priority: 0.9,  changeFrequency: "monthly" },
     { url: `${BASE}/servicios/neuromodulacion`,           priority: 0.9,  changeFrequency: "monthly" },
     { url: `${BASE}/servicios/neurolab`,                  priority: 0.9,  changeFrequency: "monthly" },
     { url: `${BASE}/servicios/nadia-donadonibus`,         priority: 0.9,  changeFrequency: "monthly" },
