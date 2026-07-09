@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ebece8;
+  --foreground: #616569;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Blog content styles */
+.blog-content p { margin-bottom: 1.25rem; line-height: 1.8; }
+.blog-content h2 { margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 900; color: #616569; }
+.blog-content strong { color: #ff6b12; font-weight: 700; }
+.blog-content ul { margin: 1rem 0 1.25rem 1.5rem; list-style: disc; }
+.blog-content li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+/* Reposicionar widget de chatbot Ana en móvil */
+#chat-widget-container,
+[id*="chat-widget"],
+[class*="chat-widget"] {
+  bottom: 90px !important;
+  right: 16px !important;
+}
+
+@media (max-width: 768px) {
+  #chat-widget-container,
+  [id*="chat-widget"],
+  [class*="chat-widget"],
+  leadconnector-chat-widget,
+  [data-widget-id="6a46860d686a90131bee5f0f"] {
+    bottom: 90px !important;
+    right: 16px !important;
+    top: auto !important;
+    left: auto !important;
+  }
+}
