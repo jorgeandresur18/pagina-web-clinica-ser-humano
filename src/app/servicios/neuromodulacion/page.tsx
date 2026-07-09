@@ -336,7 +336,7 @@ export default function NeuroniPage() {
             />
           </div>
           <div className="flex flex-col justify-center bg-[#566597] px-10 py-16 lg:px-14">
-            <p className="text-5xl font-black leading-none text-white/20">"</p>
+            <p className="text-5xl font-black leading-none text-white/20">&ldquo;</p>
             <p className="mt-2 text-xl font-light italic leading-relaxed text-white">
               El sistema nervioso puede aprender a regularse. Solo necesita
               el estímulo correcto y el acompañamiento adecuado.

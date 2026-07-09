@@ -500,7 +500,7 @@ export default function PsicoterapiaPage() {
             />
           </div>
           <div className="flex flex-col justify-center bg-[#9483a4] px-10 py-16 lg:px-14">
-            <p className="text-5xl font-black leading-none text-white/20">"</p>
+            <p className="text-5xl font-black leading-none text-white/20">&ldquo;</p>
             <p className="mt-2 text-xl font-light italic leading-relaxed text-white">
               Cada persona merece un espacio donde pueda ser escuchada sin ser juzgada,
               y acompañada con respeto en su propio proceso de cambio.

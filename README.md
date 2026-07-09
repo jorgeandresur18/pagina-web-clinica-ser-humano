@@ -26,18 +26,26 @@ Sitio web institucional de **Clínica Ser Humano Salud Integral**, desarrollado 
 
 ## Vista previa
 
-| Página | Descripción |
-|--------|-------------|
-| **Inicio** | Hero con carrusel de videos, servicios (submarcas), testimonios, equipo y sección de contacto |
-| **Neuroni** | Neuromodulación no invasiva con hero de gradiente y condiciones tratadas |
-| **NeuroLab** | Estimulación cognitiva sensorial |
-| **Dra. Nadia Donadonibus** | Psicoterapia y conductas adictivas |
-| **Programa SER** | Programa integral de recuperación |
-| **Nosotros** | Historia, equipo y enfoque humanista |
-| **Novedades** | Blog con artículos médicos y científicos |
-| **404** | Página personalizada con links de recuperación |
+### Inicio
+![Inicio](screenshots/01-inicio.png)
 
-> Las capturas de pantalla se pueden encontrar en la carpeta `/docs/screenshots/` *(pendiente de agregar)*.
+### Nosotros
+![Nosotros](screenshots/02-nosotros.png)
+
+### Novedades — Blog
+![Novedades](screenshots/03-novedades.png)
+
+### Neuroni — Neuromodulación
+![Neuroni](screenshots/04-neuroni.png)
+
+### NeuroLab
+![NeuroLab](screenshots/05-neurolab.png)
+
+### Dra. Nadia Donadonibus
+![Nadia](screenshots/06-nadia.png)
+
+### Programa SER
+![Programa SER](screenshots/07-programa-ser.png)
 
 ---
 

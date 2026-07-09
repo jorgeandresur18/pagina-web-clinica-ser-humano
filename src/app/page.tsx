@@ -99,7 +99,7 @@ function TestimoniosCarrusel() {
       setGroup(g => (g + 1) % totalGroups);
     }, 5000);
     return () => clearTimeout(t);
-  }, [single]);
+  }, [single, totalGroups]);
 
   const currentSingle = TESTIMONIOS[single];
   const groupItems = Array.from({ length: PER_PAGE }, (_, i) =>
@@ -289,7 +289,7 @@ export default function Home() {
                 basada en evidencia.
               </p>
               <p className="mt-5 text-xl font-medium italic text-brand-orange">
-                "Nos enfocamos en la recuperación del ser en su mente y cuerpo."
+                &ldquo;Nos enfocamos en la recuperación del ser en su mente y cuerpo.&rdquo;
               </p>
               <div className="mt-8 grid grid-cols-3 gap-6 border-t border-brand-gray-light/40 pt-8">
                 {[
