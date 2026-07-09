@@ -106,12 +106,14 @@ PaginaWebClinica/
 │
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx              # Layout raíz: fuente, GTM, navbar, footer
+│   │   ├── layout.tsx              # Layout raíz: fuente, navbar, footer, cookie banner
 │   │   ├── page.tsx                # Página de inicio
 │   │   ├── not-found.tsx           # Página 404 personalizada
 │   │   ├── sitemap.ts              # Generador de sitemap
 │   │   ├── robots.ts               # Generador de robots.txt
 │   │   ├── nosotros/page.tsx       # Página "Quiénes somos"
+│   │   ├── politica-de-privacidad/page.tsx  # Política LOPDP (14 secciones)
+│   │   ├── terminos-y-condiciones/page.tsx  # Términos y condiciones (12 secciones)
 │   │   ├── novedades/
 │   │   │   ├── page.tsx            # Listado del blog
 │   │   │   └── [slug]/page.tsx     # Artículo individual (ruta dinámica)
@@ -126,10 +128,11 @@ PaginaWebClinica/
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Navbar.tsx          # Navegación con dropdown de servicios
-│   │   │   ├── Footer.tsx          # Footer con redes sociales y links
-│   │   │   └── WhatsAppButton.tsx  # Botón flotante de WhatsApp
+│   │   │   ├── Footer.tsx          # Footer con redes sociales y links legales
+│   │   │   ├── WhatsAppButton.tsx  # Botón flotante de WhatsApp
+│   │   │   └── CookieBanner.tsx    # Banner de consentimiento de cookies (LOPDP)
 │   │   ├── sections/
-│   │   │   └── ContactSection.tsx  # Formulario + mapa integrado
+│   │   │   └── ContactSection.tsx  # Formulario + mapa + checkbox de consentimiento
 │   │   ├── ui/
 │   │   │   ├── Button.tsx          # Componente Button reutilizable
 │   │   │   └── VideoCarousel.tsx   # Carrusel de videos de YouTube
@@ -160,6 +163,8 @@ PaginaWebClinica/
 | `/servicios/neurolab` | Static | Servicio NeuroLab |
 | `/servicios/nadia-donadonibus` | Static | Dra. Nadia Donadonibus |
 | `/servicios/programa-ser` | Static | Programa SER Libre |
+| `/politica-de-privacidad` | Static | Política de protección de datos (LOPDP Ecuador) |
+| `/terminos-y-condiciones` | Static | Términos y condiciones de uso del sitio |
 | `/api/contact` | API Route | Envío de formulario de contacto |
 | `/sitemap.xml` | Auto-generated | Sitemap para buscadores |
 | `/robots.txt` | Auto-generated | Directivas para crawlers |
@@ -243,8 +248,9 @@ La barra de navegación incluye un dropdown en escritorio y menú mobile que lis
 | **Google Maps Embed** | iframe | Mapa de ubicación en la sección de contacto |
 | **YouTube Embed** | iframe | Videos en el carrusel del home y artículos del blog |
 | **WhatsApp API** | `wa.me` links | Botón flotante y CTAs de servicios |
-| **Google Tag Manager** | Script `<head>` | Contenedor de analíticas y marketing |
+| **Google Tag Manager** | Carga condicional (consent) | Contenedor de analíticas — solo activo tras aceptar cookies |
 | **Google Analytics 4** | Via GTM | Métricas de sesiones, usuarios y eventos |
+| **HighLevel / LeadConnector** | Script externo | Widget de chat de atención al cliente |
 
 ---
 
@@ -356,14 +362,19 @@ Generados automáticamente por Next.js:
 
 ## Pendiente / Roadmap
 
-- [ ] **Política de privacidad** — Página `/politica-de-privacidad` requerida legalmente por tener formularios activos y GTM
-- [ ] **Página de servicios** — `/servicios` devuelve 404; crear índice de servicios
-- [ ] **Más artículos del blog** — Se recomiendan 4–5 artículos para el lanzamiento (actualmente hay 2)
-- [ ] **`generateStaticParams` en el blog** — Para pre-renderizar artículos en build time
-- [ ] **Security headers** — Agregar `Content-Security-Policy`, `X-Frame-Options` y otros headers en `next.config.mjs`
-- [ ] **manifest.json** — Actualizar `"name": "App"` al nombre real de la clínica
+### Completado
+- [x] **Política de privacidad** — `/politica-de-privacidad` · 14 secciones conforme a LOPDP Ecuador
+- [x] **Términos y condiciones** — `/terminos-y-condiciones` · 12 secciones, ley aplicable Ecuador
+- [x] **Cookie consent** — Banner de consentimiento; GTM solo carga tras aceptación del usuario
+- [x] **Consentimiento en formulario** — Checkbox obligatorio vinculado a la política de privacidad
+- [x] **Nombre comercial** — Corregido a "Clínica Ser Humano" en todo el proyecto
+
+### Pendiente
+- [ ] **Página de servicios** — `/servicios` devuelve 404; crear índice de los 4 servicios
+- [ ] **`generateStaticParams` en el blog** — Pre-renderizar artículos en build time para mejor SEO
+- [ ] **Security headers** — `Content-Security-Policy`, `X-Frame-Options`, `Permissions-Policy` en `next.config.mjs`
+- [ ] **manifest.json** — Actualizar `"name": "App"` a `"Clínica Ser Humano"`
 - [ ] **Migración de dominio** — Migrar de WordPress a Vercel actualizando registros DNS
-- [ ] **Capturas de pantalla** — Agregar imágenes reales en `/docs/screenshots/` para este README
 
 ---
 

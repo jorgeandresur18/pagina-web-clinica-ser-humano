@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Calendar, Tag, User } from "lucide-react";
-import { getPost, getAdjacentPosts } from "@/lib/blog";
+import { BLOG_POSTS, getPost, getAdjacentPosts } from "@/lib/blog";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 import { articleSchema } from "@/lib/schemas";
 import JsonLd from "@/components/seo/JsonLd";
@@ -10,6 +10,10 @@ import CommentForm from "@/components/blog/CommentForm";
 import ShareButtons from "@/components/blog/ShareButtons";
 
 type Props = { params: { slug: string } };
+
+export function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+}
 
 export async function generateMetadata({ params }: Props) {
   const post = getPost(params.slug);

@@ -1,5 +1,12 @@
 {
- "name": "App",
+ "name": "Clínica Ser Humano",
+ "short_name": "Ser Humano",
+ "description": "Acompañamos procesos de recuperación y bienestar desde una visión humana e integral de la salud.",
+ "start_url": "/",
+ "display": "standalone",
+ "background_color": "#ebece8",
+ "theme_color": "#ff6b12",
+ "lang": "es-EC",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
