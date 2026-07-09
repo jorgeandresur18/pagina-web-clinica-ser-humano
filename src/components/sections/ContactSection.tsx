@@ -176,8 +176,12 @@ export default function ContactSection() {
                     placeholder="Cuéntanos brevemente lo que necesitas..."
                     className={`resize-none ${errors.mensaje ? inputErrorClass : inputClass}`}
                   />
-                  {errors.mensaje && (
+                  {errors.mensaje ? (
                     <p className="mt-1 text-xs text-red-500">{errors.mensaje}</p>
+                  ) : (
+                    <p className="mt-1.5 text-xs text-brand-gray-dark/45">
+                      Describe brevemente tu consulta. No es necesario incluir diagnósticos ni información médica detallada en este momento.
+                    </p>
                   )}
                 </div>
 

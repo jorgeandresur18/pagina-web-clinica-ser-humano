@@ -41,6 +41,16 @@ const SECCIONES = [
         <li>Fuente de tráfico (buscadores, redes sociales, acceso directo)</li>
         <li>Interacciones generales con el sitio</li>
       </ul>
+      <h3>2.3 Chatbot de admisión (Zolutium)</h3>
+      <ul>
+        <li>Nombre</li>
+        <li>Número de teléfono</li>
+        <li>Correo electrónico (si el usuario lo proporciona)</li>
+        <li>Ciudad</li>
+        <li>Motivo general de consulta</li>
+        <li>Historial de la conversación</li>
+      </ul>
+      <p>Estos datos son recopilados a través del asistente de admisión Zolutium, integrado en el sitio con la finalidad de orientar al usuario hacia el servicio más adecuado a sus necesidades.</p>
       <p>Los datos de navegación se recopilan a través de <strong>Google Tag Manager</strong> y <strong>Google Analytics 4</strong>. No recopilamos datos de salud, financieros ni datos sensibles a través del sitio web.</p>
     `,
   },
@@ -71,12 +81,61 @@ const SECCIONES = [
     id: "cookies",
     titulo: "5. Uso de cookies y tecnologías de seguimiento",
     contenido: `
-      <p>Nuestro sitio utiliza las siguientes tecnologías de seguimiento:</p>
+      <p>Nuestro sitio utiliza las siguientes tecnologías de seguimiento, que solo se activan tras tu consentimiento expreso a través del banner de cookies:</p>
       <h3>Google Tag Manager (GTM-PVFCTMQ6)</h3>
       <p>Gestiona la carga de etiquetas de análisis y marketing. Por sí solo no recopila datos personales, pero puede cargar herramientas que sí lo hacen.</p>
       <h3>Google Analytics 4 (G-MCYWCPF760)</h3>
       <p>Recopila datos de comportamiento de navegación de forma anónima para generar estadísticas de uso del sitio. Las IPs se anonimizan automáticamente. Google puede transferir estos datos a sus servidores en Estados Unidos conforme a las salvaguardas establecidas en los <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener noreferrer">Términos de Procesamiento de Datos de Google</a>.</p>
       <p>Puedes desactivar el seguimiento de Google Analytics instalando el <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">complemento de inhabilitación de Google Analytics</a> para tu navegador.</p>
+      <h3>Tabla de cookies</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85em;margin-top:8px">
+        <thead>
+          <tr style="background:#f5f5f3;text-align:left">
+            <th style="padding:8px 10px;border:1px solid #e2e2de">Cookie</th>
+            <th style="padding:8px 10px;border:1px solid #e2e2de">Proveedor</th>
+            <th style="padding:8px 10px;border:1px solid #e2e2de">Finalidad</th>
+            <th style="padding:8px 10px;border:1px solid #e2e2de">Duración</th>
+            <th style="padding:8px 10px;border:1px solid #e2e2de">Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:7px 10px;border:1px solid #e2e2de"><code>sh_cookie_consent</code></td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Clínica Ser Humano</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Guarda la preferencia de cookies del usuario</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Persistente (localStorage)</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Necesaria</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 10px;border:1px solid #e2e2de"><code>_ga</code></td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Google LLC</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Distingue usuarios únicos en Google Analytics</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">2 años</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Analítica</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 10px;border:1px solid #e2e2de"><code>_ga_MCYWCPF760</code></td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Google LLC</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Mantiene el estado de sesión en Google Analytics 4</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">2 años</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Analítica</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 10px;border:1px solid #e2e2de"><code>_gcl_au</code></td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Google LLC</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Conversiones de anuncios de Google (si activo en GTM)</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">3 meses</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Analítica / Publicidad</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Cookies de Zolutium</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Fortuniem Holding Group LLC</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Guarda la sesión del chatbot y datos ingresados para reutilizarlos</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Persistente</td>
+            <td style="padding:7px 10px;border:1px solid #e2e2de">Funcional</td>
+          </tr>
+        </tbody>
+      </table>
     `,
   },
   {
@@ -121,11 +180,13 @@ const SECCIONES = [
       <p>No vendemos ni cedemos tus datos personales a terceros con fines comerciales. Únicamente compartimos datos con los siguientes proveedores que actúan como encargados del tratamiento:</p>
       <ul>
         <li><strong>Google LLC (EE.UU.):</strong> A través de Google Analytics 4 (G-MCYWCPF760) y Google Tag Manager (GTM-PVFCTMQ6), para análisis anónimo del tráfico web. Solo se activa con tu consentimiento previo.</li>
+        <li><strong>Google Workspace / Gmail (EE.UU.):</strong> Los mensajes enviados a través del formulario de contacto se reciben en recepcion@serhumano.org, gestionada mediante Google Workspace. Google procesa estos correos en sus servidores bajo los <a href="https://workspace.google.com/terms/dpa_terms.html" target="_blank" rel="noopener noreferrer">Términos de Procesamiento de Datos de Google Workspace</a>.</li>
         <li><strong>Vercel Inc. (EE.UU.):</strong> Proveedor de alojamiento del sitio web. Procesa datos técnicos de acceso (IP, cabeceras HTTP) para servir el sitio.</li>
+        <li><strong>Zolutium — Fortuniem Holding Group LLC (EE.UU.):</strong> Asistente de admisión integrado en el sitio web. Puede recopilar nombre, teléfono, correo, ciudad y contenido de la conversación. Zolutium opera bajo la ley del Estado de Nuevo México, EE.UU., y puede compartir datos con sus subcontratistas de soporte, entre los que se incluyen Meta, WhatsApp, TikTok, Stripe, Twilio y Google. Los datos de conversación no se utilizan para entrenar modelos de IA; el asistente se entrena exclusivamente con la base de conocimiento configurada por la clínica. Para más información: <a href="https://zolutium.com" target="_blank" rel="noopener noreferrer">zolutium.com</a>.</li>
         <li><strong>HighLevel / LeadConnector (EE.UU.):</strong> Widget de chat de atención al cliente integrado en el sitio. Puede recopilar datos de la conversación iniciada voluntariamente por el usuario.</li>
         <li><strong>WhatsApp / Meta Platforms (EE.UU.):</strong> Al hacer clic en el botón de WhatsApp del sitio, eres redirigido a la plataforma de Meta. El tratamiento de datos en esa plataforma se rige por las políticas de privacidad de Meta.</li>
       </ul>
-      <p>Todos los proveedores anteriores operan bajo estándares internacionales de protección de datos y, en el caso de transferencias desde Ecuador, se aplican las salvaguardas correspondientes.</p>
+      <p>Todos los proveedores anteriores operan bajo estándares internacionales de protección de datos. Las transferencias internacionales desde Ecuador se realizan bajo las salvaguardas disponibles en cada caso, incluyendo los términos de procesamiento de datos de cada proveedor.</p>
     `,
   },
   {

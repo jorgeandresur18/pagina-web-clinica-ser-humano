@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Calendar, Tag, User } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
 import { BLOG_POSTS, getPost, getAdjacentPosts } from "@/lib/blog";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 import { articleSchema } from "@/lib/schemas";
@@ -9,6 +10,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import CommentForm from "@/components/blog/CommentForm";
 import ShareButtons from "@/components/blog/ShareButtons";
 
+type Comment = { id: number; nombre: string; comentario: string; creado_en: string };
 type Props = { params: { slug: string } };
 
 export function generateStaticParams() {
@@ -26,11 +28,26 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
-export default function BlogPostPage({ params }: Props) {
+async function getComments(slug: string): Promise<Comment[]> {
+  const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  );
+  const { data } = await supabase
+    .from("comments")
+    .select("id, nombre, comentario, creado_en")
+    .eq("slug", slug)
+    .eq("aprobado", true)
+    .order("creado_en", { ascending: true });
+  return data ?? [];
+}
+
+export default async function BlogPostPage({ params }: Props) {
   const post = getPost(params.slug);
   if (!post) notFound();
 
   const { prev, next } = getAdjacentPosts(params.slug);
+  const comments = await getComments(params.slug);
 
   return (
     <div className="bg-white">
@@ -41,6 +58,7 @@ export default function BlogPostPage({ params }: Props) {
         image: `${BASE_URL}${post.image}`,
         date: post.date,
       })} />
+
       {/* ── ARTICLE ── */}
       <article className="mx-auto max-w-3xl px-6 py-16">
         <div className="mb-6">
@@ -122,11 +140,42 @@ export default function BlogPostPage({ params }: Props) {
       {/* ── COMENTARIOS ── */}
       <section className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-6">
+
+          {/* Comentarios aprobados */}
+          {comments.length > 0 && (
+            <div className="mb-12">
+              <h2 className="mb-6 text-2xl font-black text-[#616569]">
+                {comments.length === 1 ? "1 comentario" : `${comments.length} comentarios`}
+              </h2>
+              <div className="flex flex-col gap-5">
+                {comments.map((c) => (
+                  <div key={c.id} className="rounded-2xl bg-[#f8f8f6] p-5">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#ff6b12]/15 text-sm font-bold text-[#ff6b12]">
+                        {c.nombre.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-[#616569]">{c.nombre}</p>
+                        <p className="text-xs text-[#616569]/50">
+                          {new Date(c.creado_en).toLocaleDateString("es-EC", {
+                            year: "numeric", month: "long", day: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed text-[#616569]/80">{c.comentario}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Formulario */}
           <h2 className="text-2xl font-black text-[#616569]">Deja un comentario</h2>
           <p className="mt-1 text-sm text-[#616569]/50">
-            Tu correo electrónico no será publicado.
+            Tu comentario será revisado antes de publicarse.
           </p>
-          <CommentForm />
+          <CommentForm slug={params.slug} />
         </div>
       </section>
     </div>
