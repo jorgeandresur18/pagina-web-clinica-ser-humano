@@ -1,19 +1,17 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Calendar, Tag, User } from "lucide-react";
+import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
-import { BLOG_POSTS, getPost, getAdjacentPosts } from "@/lib/blog";
-import { buildMeta, BASE_URL } from "@/lib/seo";
-import { articleSchema } from "@/lib/schemas";
-import JsonLd from "@/components/seo/JsonLd";
+import { buildMeta } from "@/lib/seo";
 import CommentForm from "@/components/blog/CommentForm";
 import ShareButtons from "@/components/blog/ShareButtons";
+
+export const dynamic = "force-dynamic";
 
 type Comment = { id: number; nombre: string; comentario: string; creado_en: string };
 type Props = { params: { slug: string } };
 
-type SupaPost = {
+type Post = {
   id: number;
   titulo: string;
   slug: string;
@@ -26,16 +24,12 @@ type SupaPost = {
   creado_en: string;
 };
 
-export function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+function sb() {
+  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SECRET_KEY!);
 }
 
-async function getSupaPost(slug: string): Promise<SupaPost | null> {
-  const supabase = createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SECRET_KEY!
-  );
-  const { data } = await supabase
+async function getPost(slug: string): Promise<Post | null> {
+  const { data } = await sb()
     .from("entradas_blog")
     .select("*")
     .eq("slug", slug)
@@ -44,32 +38,8 @@ async function getSupaPost(slug: string): Promise<SupaPost | null> {
   return data ?? null;
 }
 
-export async function generateMetadata({ params }: Props) {
-  const static_ = getPost(params.slug);
-  if (static_) {
-    return buildMeta({
-      title: `${static_.title} | Clínica Ser Humano`,
-      description: static_.excerpt,
-      path: `/novedades/${static_.slug}`,
-      image: `${BASE_URL}${static_.image}`,
-    });
-  }
-  const supa = await getSupaPost(params.slug);
-  if (!supa) return {};
-  return buildMeta({
-    title: `${supa.titulo} | Clínica Ser Humano`,
-    description: supa.extracto ?? "",
-    path: `/novedades/${supa.slug}`,
-    image: supa.imagen_url ?? undefined,
-  });
-}
-
 async function getComments(slug: string): Promise<Comment[]> {
-  const supabase = createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SECRET_KEY!
-  );
-  const { data } = await supabase
+  const { data } = await sb()
     .from("comments")
     .select("id, nombre, comentario, creado_en")
     .eq("slug", slug)
@@ -78,141 +48,88 @@ async function getComments(slug: string): Promise<Comment[]> {
   return data ?? [];
 }
 
+export async function generateMetadata({ params }: Props) {
+  const post = await getPost(params.slug);
+  if (!post) return {};
+  return buildMeta({
+    title: `${post.titulo} | Clínica Ser Humano`,
+    description: post.extracto ?? "",
+    path: `/novedades/${post.slug}`,
+    image: post.imagen_url ?? undefined,
+  });
+}
+
 export default async function BlogPostPage({ params }: Props) {
-  const staticPost = getPost(params.slug);
-  const supaPost = staticPost ? null : await getSupaPost(params.slug);
+  const [post, comments] = await Promise.all([
+    getPost(params.slug),
+    getComments(params.slug),
+  ]);
 
-  if (!staticPost && !supaPost) notFound();
+  if (!post) notFound();
 
-  const comments = await getComments(params.slug);
-
-  /* ── Artículo de Supabase ── */
-  if (supaPost) {
-    const fecha = new Date(supaPost.creado_en).toLocaleDateString("es-EC", {
-      year: "numeric", month: "long", day: "numeric",
-    });
-    return (
-      <div className="bg-white">
-        <article className="mx-auto max-w-3xl px-6 py-16">
-          <div className="mb-6">
-            <span className="rounded-full bg-[#ff6b12]/10 px-3 py-1 text-xs font-bold uppercase text-[#ff6b12]">
-              {supaPost.categoria ?? "Novedades"}
-            </span>
-          </div>
-          <h1 className="text-3xl font-black leading-tight text-[#616569] md:text-4xl">
-            {supaPost.titulo}
-          </h1>
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-[#616569]/55">
-            <span className="flex items-center gap-1.5">
-              <User size={14} /> {supaPost.autor ?? "Clínica Ser Humano"}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Calendar size={14} /> {fecha}
-            </span>
-          </div>
-          {supaPost.imagen_url && (
-            <div className="mt-8 overflow-hidden rounded-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={supaPost.imagen_url}
-                alt={supaPost.titulo}
-                className="h-72 w-full object-cover md:h-96"
-              />
-            </div>
-          )}
-          <div
-            className="blog-content mt-10 text-[#616569]/80"
-            dangerouslySetInnerHTML={{ __html: supaPost.contenido ?? "" }}
-          />
-          {supaPost.etiquetas && supaPost.etiquetas.length > 0 && (
-            <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100 pt-8">
-              <div className="flex flex-wrap items-center gap-2">
-                <Tag size={14} className="text-[#616569]/40" />
-                {supaPost.etiquetas.map((t) => (
-                  <span key={t} className="rounded-full bg-[#ebece8] px-3 py-1 text-xs text-[#616569]">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <ShareButtons title={supaPost.titulo} />
-            </div>
-          )}
-        </article>
-        <CommentsSection slug={params.slug} comments={comments} />
-      </div>
-    );
-  }
-
-  /* ── Artículo estático (blog.ts) ── */
-  const post = staticPost!;
-  const { prev, next } = getAdjacentPosts(params.slug);
+  const fecha = new Date(post.creado_en).toLocaleDateString("es-EC", {
+    year: "numeric", month: "long", day: "numeric",
+  });
 
   return (
     <div className="bg-white">
-      <JsonLd data={articleSchema({
-        title: post.title,
-        excerpt: post.excerpt,
-        slug: post.slug,
-        image: `${BASE_URL}${post.image}`,
-        date: post.date,
-      })} />
-
       <article className="mx-auto max-w-3xl px-6 py-16">
-        <div className="mb-6">
+        <Link
+          href="/novedades"
+          className="mb-8 inline-flex items-center gap-2 text-sm text-[#616569]/60 hover:text-[#ff6b12] transition-colors"
+        >
+          <ArrowLeft size={14} /> Novedades
+        </Link>
+
+        <div className="mb-6 mt-4">
           <span className="rounded-full bg-[#ff6b12]/10 px-3 py-1 text-xs font-bold uppercase text-[#ff6b12]">
-            {post.category}
+            {post.categoria ?? "Novedades"}
           </span>
         </div>
-        <h1 className="text-3xl font-black leading-tight text-[#616569] md:text-4xl">
-          {post.title}
-        </h1>
-        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-[#616569]/55">
-          <span className="flex items-center gap-1.5"><User size={14} /> {post.author}</span>
-          <span className="flex items-center gap-1.5"><Calendar size={14} /> {post.date}</span>
-        </div>
-        <div className="mt-8 overflow-hidden rounded-2xl">
-          <Image
-            src={post.image}
-            alt={post.title}
-            width={900}
-            height={500}
-            className="h-72 w-full object-cover md:h-96"
-          />
-        </div>
-        <div className="blog-content mt-10 text-[#616569]/80" dangerouslySetInnerHTML={{ __html: post.content }} />
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100 pt-8">
-          <div className="flex flex-wrap items-center gap-2">
-            <Tag size={14} className="text-[#616569]/40" />
-            {post.tags.map((t) => (
-              <span key={t} className="rounded-full bg-[#ebece8] px-3 py-1 text-xs text-[#616569]">{t}</span>
-            ))}
-          </div>
-          <ShareButtons title={post.title} />
-        </div>
-      </article>
 
-      <div className="border-t border-gray-100 bg-[#ebece8]">
-        <div className="mx-auto flex max-w-3xl flex-wrap justify-between gap-6 px-6 py-10">
-          {prev && (
-            <Link href={`/novedades/${prev.slug}`} className="group flex items-start gap-3">
-              <ArrowLeft size={18} className="mt-0.5 shrink-0 text-[#ff6b12]" />
-              <div>
-                <p className="text-xs uppercase text-[#616569]/50">Artículo anterior</p>
-                <p className="mt-1 font-bold text-[#616569] transition-colors group-hover:text-[#ff6b12]">{prev.title}</p>
-              </div>
-            </Link>
-          )}
-          {next && (
-            <Link href={`/novedades/${next.slug}`} className="group ml-auto flex items-start gap-3 text-right">
-              <div>
-                <p className="text-xs uppercase text-[#616569]/50">Artículo siguiente</p>
-                <p className="mt-1 font-bold text-[#616569] transition-colors group-hover:text-[#ff6b12]">{next.title}</p>
-              </div>
-              <ArrowRight size={18} className="mt-0.5 shrink-0 text-[#ff6b12]" />
-            </Link>
-          )}
+        <h1 className="text-3xl font-black leading-tight text-[#616569] md:text-4xl">
+          {post.titulo}
+        </h1>
+
+        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-[#616569]/55">
+          <span className="flex items-center gap-1.5">
+            <User size={14} /> {post.autor ?? "Clínica Ser Humano"}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Calendar size={14} /> {fecha}
+          </span>
         </div>
-      </div>
+
+        {post.imagen_url && (
+          <div className="mt-8 overflow-hidden rounded-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={post.imagen_url}
+              alt={post.titulo}
+              className="h-72 w-full object-cover md:h-96"
+            />
+          </div>
+        )}
+
+        <div
+          className="blog-content mt-10 text-[#616569]/80"
+          dangerouslySetInnerHTML={{ __html: post.contenido ?? "" }}
+        />
+
+        {post.etiquetas && post.etiquetas.length > 0 && (
+          <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100 pt-8">
+            <div className="flex flex-wrap items-center gap-2">
+              <Tag size={14} className="text-[#616569]/40" />
+              {post.etiquetas.map((t) => (
+                <span key={t} className="rounded-full bg-[#ebece8] px-3 py-1 text-xs text-[#616569]">
+                  {t}
+                </span>
+              ))}
+            </div>
+            <ShareButtons title={post.titulo} />
+          </div>
+        )}
+      </article>
 
       <CommentsSection slug={params.slug} comments={comments} />
     </div>

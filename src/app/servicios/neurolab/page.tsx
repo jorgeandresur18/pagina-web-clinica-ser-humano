@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AnimatedStats, { type Stat } from "@/components/ui/AnimatedStats";
 import { Brain, Check, CheckCircle, Shield, Users, Zap, Wind, Clock, BookOpen, Network, Heart, Target, Flame } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
@@ -152,6 +153,13 @@ const ESPECIALISTAS = [
     descripcion:
       "Especialista en Psicología Clínica con formación en Terapia Cognitivo-Conductual. Enfocado en la evaluación e intervención psicopedagógica y neurosensorial, orientada al abordaje integral del deterioro cognitivo y conductual.",
   },
+];
+
+const INTRAS_STATS: Stat[] = [
+  { target: 843,  prefix: "",  suffix: "",  label: "Profesionales en plantilla" },
+  { target: 29,   prefix: "",  suffix: "",  label: "Centros y servicios de salud mental" },
+  { target: 2628, prefix: "",  suffix: "",  label: "Usuarios atendidos en 2024" },
+  { target: 49,   prefix: "",  suffix: "",  label: "Nuevos proyectos en 2024" },
 ];
 
 const AVALADO_LOGOS = [
@@ -790,25 +798,72 @@ export default function NeuroLabPage() {
         </div>
       </section>
 
-      {/* ── AVALADO POR ── */}
-      <section className="bg-brand-base py-12">
+      {/* ── AVALADO POR FUNDACIÓN INTRAS ── */}
+      <section className="bg-white py-20">
         <div className="mx-auto max-w-5xl px-6">
-          <p className="mb-8 text-center text-sm font-bold uppercase tracking-widest text-brand-gray-dark/60">
-            Avalado por:
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8">
-            {AVALADO_LOGOS.map((logo) => (
-              <div key={logo.alt} className="flex items-center justify-center">
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={200}
-                  height={100}
-                  className="object-contain"
-                  style={{ height: logo.displayH, width: "auto" }}
+          <div className="overflow-hidden rounded-3xl border border-[#d0d1d1]/60 bg-[#f5f5f6]">
+            <div className="p-10 lg:p-14">
+
+              {/* Logo + título */}
+              <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <span className="inline-block rounded-full bg-brand-orange/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-orange">
+                    Plataforma certificada
+                  </span>
+                  <h2 className="mt-4 text-2xl font-black leading-snug text-brand-gray-dark md:text-3xl">
+                    Programa respaldado por<br />Fundación INTRAS
+                  </h2>
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logos/fundacionintras.png"
+                  alt="Fundación INTRAS"
+                  className="h-auto w-52 flex-shrink-0 object-contain sm:w-64"
                 />
               </div>
-            ))}
+
+              {/* Stats animados */}
+              <div className="mt-10">
+                <AnimatedStats
+                  accentColor="#ff6b12"
+                  borderColor="#e5e7eb"
+                  stats={INTRAS_STATS}
+                />
+              </div>
+
+              {/* Descripción */}
+              <p className="mt-10 leading-relaxed text-[#606265]/70">
+                Fundación INTRAS es una entidad sin ánimo de lucro fundada en 1994 dedicada
+                al acompañamiento de personas con problemas de salud mental. Con casi 900
+                profesionales y presencia en 8 provincias de España y una red activa en toda
+                Europa, INTRAS desarrolla la plataforma de estimulación cognitiva que impulsa
+                el programa NeuroLab. Su tecnología —ya presente en más de 500 centros europeos—
+                llega a Ecuador de la mano de Clínica Ser Humano, siendo el{" "}
+                <strong className="text-brand-gray-dark">primer centro autorizado en el país.</strong>
+              </p>
+
+              {/* Instituciones que nos avalan */}
+              <div className="mt-10 border-t border-[#d0d1d1] pt-8">
+                <p className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-[#606265]/50">
+                  Instituciones que nos avalan:
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-8">
+                  {AVALADO_LOGOS.map((logo) => (
+                    <div key={logo.alt} className="flex items-center justify-center">
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={200}
+                        height={100}
+                        className="object-contain opacity-75 transition-opacity hover:opacity-100"
+                        style={{ height: logo.displayH, width: "auto" }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import Script from "next/script";
+import { headers } from "next/headers";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -73,23 +74,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAdmin = headers().get("x-is-admin") === "1";
+
   return (
     <html lang="es">
       <head />
       <body className={`${outfit.variable} font-sans antialiased bg-brand-base text-brand-gray-dark`}>
-        <JsonLd data={organizationSchema} />
-        <JsonLd data={websiteSchema} />
-        <Navbar />
-        <main className="pt-[72px]">{children}</main>
-        <Footer />
-        <WhatsAppButton />
-        <CookieBanner />
-        <Script
-          src="https://widgets.leadconnectorhq.com/loader.js"
-          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-          data-widget-id="6a46860d686a90131bee5f0f"
-          strategy="lazyOnload"
-        />
+        {!isAdmin && <JsonLd data={organizationSchema} />}
+        {!isAdmin && <JsonLd data={websiteSchema} />}
+        {!isAdmin && <Navbar />}
+        <main className={isAdmin ? "" : "pt-[72px]"}>{children}</main>
+        {!isAdmin && <Footer />}
+        {!isAdmin && <WhatsAppButton />}
+        {!isAdmin && <CookieBanner />}
+        {!isAdmin && (
+          <Script
+            src="https://widgets.leadconnectorhq.com/loader.js"
+            data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+            data-widget-id="6a46860d686a90131bee5f0f"
+            strategy="lazyOnload"
+          />
+        )}
       </body>
     </html>
   );

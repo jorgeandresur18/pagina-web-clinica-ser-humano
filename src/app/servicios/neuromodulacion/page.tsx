@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AnimatedStats from "@/components/ui/AnimatedStats";
 import {
   Brain, Wind, Clock, BookOpen, Network, Heart, Flame, Target,
   Zap, Shield, Activity, ArrowRight, Users,
@@ -319,6 +320,53 @@ export default function NeuroniPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── AVALADO POR NESA WORLD ── */}
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="overflow-hidden rounded-3xl border border-[#d0d1d1]/60 bg-[#f5f5f6]">
+            <div className="p-10 lg:p-14">
+
+              {/* Logo + badge */}
+              <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <span className="inline-block rounded-full bg-[#566597]/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#566597]">
+                    Tecnología certificada
+                  </span>
+                  <h2 className="mt-4 text-2xl font-black leading-snug text-[#4f5571] md:text-3xl">
+                    Respaldados por la tecnología<br />NESA XSIGNAL®
+                  </h2>
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logos/nesa.png"
+                  alt="NESA World"
+                  className="h-auto w-52 flex-shrink-0 object-contain sm:w-64"
+                />
+              </div>
+
+              {/* Stats animados */}
+              <div className="mt-10">
+                <AnimatedStats />
+              </div>
+
+              {/* Descripción */}
+              <p className="mt-10 leading-relaxed text-[#606265]/70">
+                NESA® combina visión clínica, formación, soporte y expansión internacional.
+                Su crecimiento se sustenta sobre una red de hospitales, clínicas, universidades
+                y distribuidores presentes en más de 47 países. La tecnología opera en ocho
+                especialidades —rehabilitación, neurología, salud mental, dolor, odontología,
+                medicina deportiva, medicina interna y estética— y avanza hacia nuevas áreas
+                como gastroenterología, neumología, cardiología y pediatría, donde el sistema
+                nervioso autónomo juega un papel determinante. Cuando el SNA funciona bien,
+                el sueño se restaura, la inflamación disminuye y el paciente responde mejor
+                a cualquier intervención. <strong className="text-[#4f5571]">NESA® no compite con la especialidad: la potencia.</strong>
+              </p>
+
+            </div>
           </div>
         </div>
       </section>

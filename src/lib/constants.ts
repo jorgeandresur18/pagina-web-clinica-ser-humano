@@ -27,6 +27,7 @@ export const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
   { label: "Novedades", href: "/novedades" },
+  { label: "Resp. Social", href: "/responsabilidad-social" },
   { label: "Contacto", href: "/#contacto" },
 ];
 
