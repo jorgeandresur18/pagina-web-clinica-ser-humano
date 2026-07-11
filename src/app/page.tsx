@@ -10,6 +10,7 @@ import {
 import Button from "@/components/ui/Button";
 import VideoCarousel from "@/components/ui/VideoCarousel";
 import ContactSection from "@/components/sections/ContactSection";
+import InstagramFeed from "@/components/sections/InstagramFeed";
 import { EQUIPO, SUBMARCAS, UNIVERSIDADES, getWhatsappUrl } from "@/lib/constants";
 
 const TESTIMONIOS = [
@@ -559,7 +560,10 @@ export default function Home() {
       {/* SECCIÓN 8 — TESTIMONIOS (carrusel) */}
       <TestimoniosCarrusel />
 
-      {/* SECCIÓN 9 — CONTACTO */}
+      {/* SECCIÓN 9 — INSTAGRAM */}
+      <InstagramFeed />
+
+      {/* SECCIÓN 10 — CONTACTO */}
       <ContactSection />
 
       {/* SECCIÓN 9 — CTA FINAL WHATSAPP */}
