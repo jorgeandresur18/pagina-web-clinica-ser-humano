@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: team_2XvRAaAKTyjtzeSMMk6pRJ3o
-      VERCEL_PROJECT_ID: prj_5vSGt6GdAsBiAWoDymGLTgw2Emug
+      VERCEL_PROJECT_ID: prj_eFVvJ4fNOrnsUAoydm6oPF2nrEwH
     steps:
       - uses: actions/checkout@v4
 
