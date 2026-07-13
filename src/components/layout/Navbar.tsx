@@ -6,12 +6,13 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
-import { NAV_LINKS, SUBMARCAS, getWhatsappUrl } from "@/lib/constants";
+import { NAV_LINKS, SUBMARCAS, RESP_SOCIAL_PROYECTOS, getWhatsappUrl } from "@/lib/constants";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [socialOpen, setSocialOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -39,6 +40,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
+          {/* Inicio, Nosotros */}
           {NAV_LINKS.slice(0, 2).map((link) => (
             <Link
               key={link.href}
@@ -49,6 +51,7 @@ export default function Navbar() {
             </Link>
           ))}
 
+          {/* Servicios dropdown */}
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -92,15 +95,65 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          {NAV_LINKS.slice(2).map((link) => (
+          {/* Novedades */}
+          <Link
+            href={NAV_LINKS[2].href}
+            className="text-sm font-medium text-brand-gray-dark transition-colors hover:text-brand-orange"
+          >
+            {NAV_LINKS[2].label}
+          </Link>
+
+          {/* Resp. Social dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setSocialOpen(true)}
+            onMouseLeave={() => setSocialOpen(false)}
+          >
             <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-brand-gray-dark transition-colors hover:text-brand-orange"
+              href="/responsabilidad-social"
+              className="flex items-center gap-1 text-sm font-medium text-brand-gray-dark transition-colors hover:text-brand-orange"
             >
-              {link.label}
+              Resp. Social
+              <ChevronDown size={16} className={`transition-transform ${socialOpen ? "rotate-180" : ""}`} />
             </Link>
-          ))}
+            <AnimatePresence>
+              {socialOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 top-full w-64 rounded-xl bg-white p-2 shadow-lg"
+                >
+                  {RESP_SOCIAL_PROYECTOS.map((p) => (
+                    <Link
+                      key={p.slug}
+                      href={p.href}
+                      className="block rounded-lg px-4 py-3 text-sm text-brand-gray-dark transition-colors hover:bg-brand-base hover:text-brand-orange"
+                    >
+                      {p.nombre}
+                    </Link>
+                  ))}
+                  <div className="mt-1 border-t border-brand-base pt-1">
+                    <Link
+                      href="/responsabilidad-social"
+                      className="block rounded-lg px-4 py-2.5 text-xs font-semibold text-brand-orange transition-colors hover:bg-brand-base"
+                    >
+                      Ver todos los proyectos →
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Contacto */}
+          <Link
+            href={NAV_LINKS[3].href}
+            className="text-sm font-medium text-brand-gray-dark transition-colors hover:text-brand-orange"
+          >
+            {NAV_LINKS[3].label}
+          </Link>
         </div>
 
         <div className="hidden md:block">
@@ -157,16 +210,39 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              {NAV_LINKS.slice(2).map((link) => (
+              <Link
+                href={NAV_LINKS[2].href}
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg px-2 py-3 text-brand-gray-dark hover:bg-brand-base hover:text-brand-orange"
+              >
+                {NAV_LINKS[2].label}
+              </Link>
+
+              <Link
+                href="/responsabilidad-social"
+                onClick={() => setMobileOpen(false)}
+                className="px-2 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-brand-orange hover:underline"
+              >
+                Resp. Social
+              </Link>
+              {RESP_SOCIAL_PROYECTOS.map((p) => (
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  key={p.slug}
+                  href={p.href}
                   onClick={() => setMobileOpen(false)}
                   className="rounded-lg px-2 py-3 text-brand-gray-dark hover:bg-brand-base hover:text-brand-orange"
                 >
-                  {link.label}
+                  {p.nombre}
                 </Link>
               ))}
+
+              <Link
+                href={NAV_LINKS[3].href}
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg px-2 py-3 text-brand-gray-dark hover:bg-brand-base hover:text-brand-orange"
+              >
+                {NAV_LINKS[3].label}
+              </Link>
 
               <Button
                 href={getWhatsappUrl()}

@@ -27,8 +27,18 @@ export const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
   { label: "Novedades", href: "/novedades" },
-  { label: "Resp. Social", href: "/responsabilidad-social" },
   { label: "Contacto", href: "/#contacto" },
+];
+
+export const RESP_SOCIAL_PROYECTOS = [
+  {
+    slug: "proyecto-renacer",
+    nombre: "Proyecto Renacer",
+    tagline: "Rescate y reinserción social",
+    descripcion: "Programa de la Fundación Ser Humano para la prevención y recuperación de personas en situación de desequilibrio existencial, con tratamiento psicoeducacional y neurológico.",
+    imagen: "/social/20191222_110757.jpg",
+    href: "/responsabilidad-social/proyecto-renacer",
+  },
 ];
 
 export const SUBMARCAS = [
