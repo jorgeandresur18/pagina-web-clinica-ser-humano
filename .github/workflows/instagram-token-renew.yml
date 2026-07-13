@@ -1,0 +1,112 @@
+name: Instagram Token Auto-Renew
+
+on:
+  schedule:
+    - cron: "0 9 1 * *"  # el 1ro de cada mes a las 9am UTC
+  workflow_dispatch:       # permite ejecutarlo manualmente
+
+jobs:
+  renew:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Renovar token y notificar
+        run: |
+          python3 - <<'PYEOF'
+          import urllib.request, urllib.parse, json, smtplib, os, sys
+          from email.mime.text import MIMEText
+
+          token      = os.environ["INSTAGRAM_ACCESS_TOKEN"]
+          smtp_user  = os.environ["SMTP_USER"]
+          smtp_pass  = os.environ["SMTP_PASS"]
+          vercel_tok = os.environ["VERCEL_TOKEN"]
+          project_id = os.environ["VERCEL_PROJECT_ID"]
+          team_id    = os.environ["VERCEL_ORG_ID"]
+          notify_to  = os.environ["NOTIFY_EMAIL"]
+
+          # ── 1. Renovar token con Instagram API ──────────────────────────
+          url = (
+              "https://graph.instagram.com/refresh_access_token"
+              f"?grant_type=ig_refresh_token&access_token={token}"
+          )
+          try:
+              with urllib.request.urlopen(url) as r:
+                  data = json.loads(r.read())
+              new_token = data["access_token"]
+              days      = data.get("expires_in", 0) // 86400
+          except Exception as e:
+              new_token = None
+              days      = 0
+              print(f"Error renovando token: {e}", file=sys.stderr)
+
+          # ── 2. Actualizar variable en Vercel ────────────────────────────
+          headers = {
+              "Authorization": f"Bearer {vercel_tok}",
+              "Content-Type": "application/json",
+          }
+          updated = False
+          if new_token and new_token != token:
+              # Obtener ID de la variable
+              env_url = (
+                  f"https://api.vercel.com/v10/projects/{project_id}/env"
+                  f"?teamId={team_id}"
+              )
+              req = urllib.request.Request(env_url, headers=headers)
+              with urllib.request.urlopen(req) as r:
+                  envs = json.loads(r.read()).get("envs", [])
+
+              env_id = next(
+                  (e["id"] for e in envs if e.get("key") == "INSTAGRAM_ACCESS_TOKEN"),
+                  None,
+              )
+              if env_id:
+                  patch_url = (
+                      f"https://api.vercel.com/v10/projects/{project_id}/env/{env_id}"
+                      f"?teamId={team_id}"
+                  )
+                  payload = json.dumps({"value": new_token}).encode()
+                  req = urllib.request.Request(
+                      patch_url, data=payload, headers=headers, method="PATCH"
+                  )
+                  urllib.request.urlopen(req)
+                  updated = True
+
+          # ── 3. Enviar email de confirmación ─────────────────────────────
+          if new_token:
+              subject = f"✅ Token Instagram renovado — válido {days} días"
+              body = (
+                  f"El token de Instagram de Clínica Ser Humano fue renovado automáticamente.\n\n"
+                  f"Válido por: {days} días\n"
+                  f"Variable actualizada en Vercel: {'Sí' if updated else 'No (requiere redeploy manual)'}\n\n"
+                  f"Próxima renovación automática: el 1ro del mes siguiente.\n"
+              )
+          else:
+              subject = "⚠️ Error: Token Instagram NO renovado — acción requerida"
+              body = (
+                  "No se pudo renovar el token de Instagram automáticamente.\n\n"
+                  "Por favor renuévalo manualmente:\n"
+                  "1. Entra a developers.facebook.com\n"
+                  "2. Ve a tu app → Instagram API → Generar token\n"
+                  "3. Actualiza INSTAGRAM_ACCESS_TOKEN en Vercel\n"
+              )
+
+          msg = MIMEText(body, "plain", "utf-8")
+          msg["Subject"] = subject
+          msg["From"]    = smtp_user
+          msg["To"]      = notify_to
+
+          with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+              server.login(smtp_user, smtp_pass)
+              server.send_message(msg)
+
+          print(subject)
+          if not new_token:
+              sys.exit(1)
+          PYEOF
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          SMTP_USER:              ${{ secrets.SMTP_USER }}
+          SMTP_PASS:              ${{ secrets.SMTP_PASS }}
+          VERCEL_TOKEN:           ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID:      prj_eFVvJ4fNOrnsUAoydm6oPF2nrEwH
+          VERCEL_ORG_ID:          team_2XvRAaAKTyjtzeSMMk6pRJ3o
+          NOTIFY_EMAIL:           ${{ secrets.NOTIFY_EMAIL }}
