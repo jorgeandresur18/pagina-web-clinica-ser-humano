@@ -10,13 +10,10 @@ export const metadata = buildMeta({
   path: "/responsabilidad-social/proyecto-renacer",
 });
 
-const VALORES = [
-  "Honestidad",
-  "Integridad",
-  "Coherencia",
-  "Humildad",
-  "Amor",
-];
+// Colores del logo Proyecto Renacer
+// Teal: #1A9B8A  |  Índigo/morado oscuro: #2E2A72  |  Morado claro: #7B5EA7
+
+const VALORES = ["Honestidad", "Integridad", "Coherencia", "Humildad", "Amor"];
 
 const ESTADISTICAS = [
   { valor: "50%", etiqueta: "reducción del deseo de consumo en 6 días" },
@@ -38,40 +35,91 @@ const FOTOS = [
   "/social/IMG-20191222-WA0012-01.jpeg",
 ];
 
+const PROGRAMAS = [
+  {
+    icono: <Heart size={24} />,
+    titulo: "Tratamiento psicoeducacional",
+    descripcion:
+      "Abordaje integral que combina educación emocional, terapia grupal e individual para la recuperación de conductas adictivas.",
+  },
+  {
+    icono: <Star size={24} />,
+    titulo: "Estimulación neurológica",
+    descripcion:
+      "Tratamiento mediante estimulación eléctrica transcraneal para reparar el daño al sistema nervioso central causado por el consumo.",
+  },
+  {
+    icono: <Users size={24} />,
+    titulo: "Empoderamiento familiar",
+    descripcion:
+      "Acompañamiento y formación a las familias para fortalecer la red de apoyo en el proceso de recuperación.",
+  },
+  {
+    icono: <ArrowRight size={24} />,
+    titulo: "Reinserción social",
+    descripcion:
+      "Programas de capacitación y seguimiento para facilitar el retorno del individuo a su familia y entorno laboral.",
+  },
+  {
+    icono: <Star size={24} />,
+    titulo: "Formación comunitaria",
+    descripcion:
+      "Talleres, charlas y diplomados para comunidades, instituciones y organizaciones que trabajan con poblaciones vulnerables.",
+  },
+  {
+    icono: <Heart size={24} />,
+    titulo: "Modelo de apadrinamiento",
+    descripcion:
+      "Sistema de donaciones y patrocinio que permite atender a personas de escasos recursos sin costo para ellas.",
+  },
+];
+
 export default function ProyectoRenacerPage() {
   return (
-    <div className="min-h-screen bg-brand-base">
+    <div className="min-h-screen" style={{ backgroundColor: "#f0f2f0" }}>
 
       {/* ── HERO ── */}
-      <section className="relative flex min-h-[480px] items-end overflow-hidden bg-brand-gray-dark">
+      <section className="relative flex min-h-[520px] items-end overflow-hidden" style={{ backgroundColor: "#2E2A72" }}>
         <div className="absolute inset-0">
           <Image
             src="/social/20191222_113326.jpg"
             alt="Proyecto Renacer"
             fill
-            className="object-cover object-center"
+            className="object-cover object-center opacity-30"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #2E2A72 40%, #2E2A72aa 70%, transparent)" }} />
         </div>
         <div className="relative z-10 mx-auto w-full max-w-4xl px-6 py-16">
-          <span className="inline-flex items-center gap-2 rounded-full bg-brand-orange/90 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
+          {/* Logo */}
+          <div className="mb-6">
+            <Image
+              src="/logos/proyecto-renacer.png"
+              alt="Proyecto Renacer"
+              width={220}
+              height={70}
+              className="h-14 w-auto brightness-0 invert"
+            />
+          </div>
+          <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white" style={{ backgroundColor: "#1A9B8A" }}>
             <Heart size={12} />
-            Responsabilidad Social
+            Responsabilidad Social · Fundación Ser Humano
           </span>
           <h1 className="mt-4 text-5xl font-black text-white md:text-6xl">
-            Proyecto Renacer
+            Rescatando vidas<br />
+            <span style={{ color: "#1A9B8A" }}>desde 2007</span>
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/80">
-            Fundación Ser Humano — rescatando vidas desde 2007 a través del
-            tratamiento psicoeducacional y neurológico.
+            Programa de prevención y recuperación con tratamiento psicoeducacional
+            y neurológico para comunidades vulnerables de Guayaquil.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
               href="https://proyectorenacerec.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#e25c08]"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: "#1A9B8A" }}
             >
               Visitar sitio web
               <ArrowRight size={15} />
@@ -87,10 +135,10 @@ export default function ProyectoRenacerPage() {
       </section>
 
       {/* ── ESTADÍSTICAS ── */}
-      <section className="bg-brand-orange">
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-px md:grid-cols-4">
+      <section style={{ backgroundColor: "#1A9B8A" }}>
+        <div className="mx-auto grid max-w-4xl grid-cols-2 md:grid-cols-4">
           {ESTADISTICAS.map((e) => (
-            <div key={e.etiqueta} className="bg-brand-orange px-6 py-8 text-center">
+            <div key={e.etiqueta} className="px-6 py-8 text-center">
               <p className="text-4xl font-black text-white">{e.valor}</p>
               <p className="mt-1 text-xs leading-snug text-white/80">{e.etiqueta}</p>
             </div>
@@ -103,10 +151,10 @@ export default function ProyectoRenacerPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-brand-orange">
+              <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#1A9B8A" }}>
                 Quiénes somos
               </p>
-              <h2 className="mt-3 text-3xl font-black text-brand-gray-dark md:text-4xl">
+              <h2 className="mt-3 text-3xl font-black md:text-4xl" style={{ color: "#2E2A72" }}>
                 Fundación Ser Humano
               </h2>
               <p className="mt-5 text-base leading-relaxed text-brand-gray-dark/70">
@@ -117,8 +165,8 @@ export default function ProyectoRenacerPage() {
               <p className="mt-4 text-base leading-relaxed text-brand-gray-dark/70">
                 Trabajamos con un enfoque innovador que combina terapia
                 psicoeducacional y estimulación neurológica por estimulación
-                eléctrica transcraneal, atendiendo las consecuencias del consumo
-                de sustancias sobre el sistema nervioso central.
+                eléctrica transcraneal, abordando el daño que las sustancias
+                causan en el sistema nervioso central.
               </p>
               <p className="mt-4 text-base leading-relaxed text-brand-gray-dark/70">
                 Ecuador ocupa el primer lugar mundial en consumo de heroína
@@ -134,19 +182,29 @@ export default function ProyectoRenacerPage() {
                 fill
                 className="object-cover object-center"
               />
+              {/* Logo overlay */}
+              <div className="absolute bottom-4 left-4 rounded-xl bg-white/90 p-3 backdrop-blur-sm">
+                <Image
+                  src="/logos/proyecto-renacer.png"
+                  alt="Proyecto Renacer"
+                  width={140}
+                  height={45}
+                  className="h-10 w-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── MISIÓN ── */}
-      <section className="bg-brand-base py-20">
+      <section className="py-20" style={{ backgroundColor: "#2E2A72" }}>
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-4 py-2 text-sm font-bold text-brand-orange">
+          <span className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-white" style={{ backgroundColor: "#1A9B8A" }}>
             <Star size={14} />
             Nuestra misión
           </span>
-          <blockquote className="mt-8 text-2xl font-bold leading-relaxed text-brand-gray-dark md:text-3xl">
+          <blockquote className="mt-8 text-xl font-bold leading-relaxed text-white md:text-2xl">
             "Contribuir a la prevención y atención de los seres humanos en
             situación de desequilibrio existencial a través de programas de
             salud integral — cuerpo, psique y espíritu — que les permitan
@@ -158,17 +216,18 @@ export default function ProyectoRenacerPage() {
       {/* ── VALORES ── */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-brand-orange">
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#1A9B8A" }}>
             Lo que nos guía
           </p>
-          <h2 className="mt-3 text-3xl font-black text-brand-gray-dark">
+          <h2 className="mt-3 text-3xl font-black" style={{ color: "#2E2A72" }}>
             Nuestros valores
           </h2>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             {VALORES.map((v) => (
               <span
                 key={v}
-                className="rounded-full border border-brand-orange/30 bg-brand-orange/5 px-6 py-3 text-base font-semibold text-brand-gray-dark"
+                className="rounded-full px-6 py-3 text-base font-semibold text-white"
+                style={{ backgroundColor: "#2E2A72" }}
               >
                 {v}
               </span>
@@ -178,61 +237,21 @@ export default function ProyectoRenacerPage() {
       </section>
 
       {/* ── PROGRAMAS ── */}
-      <section className="bg-brand-base py-20">
+      <section className="py-20" style={{ backgroundColor: "#f0f2f0" }}>
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-brand-orange">
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#1A9B8A" }}>
             Lo que hacemos
           </p>
-          <h2 className="mt-3 text-3xl font-black text-brand-gray-dark">
+          <h2 className="mt-3 text-3xl font-black" style={{ color: "#2E2A72" }}>
             Programas y servicios
           </h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                icono: <Heart size={24} />,
-                titulo: "Tratamiento psicoeducacional",
-                descripcion:
-                  "Abordaje integral que combina educación emocional, terapia grupal e individual para la recuperación de conductas adictivas.",
-              },
-              {
-                icono: <Star size={24} />,
-                titulo: "Estimulación neurológica",
-                descripcion:
-                  "Tratamiento mediante estimulación eléctrica transcraneal para reparar el daño al sistema nervioso central causado por el consumo.",
-              },
-              {
-                icono: <Users size={24} />,
-                titulo: "Empoderamiento familiar",
-                descripcion:
-                  "Acompañamiento y formación a las familias para fortalecer la red de apoyo en el proceso de recuperación.",
-              },
-              {
-                icono: <ArrowRight size={24} />,
-                titulo: "Reinserción social",
-                descripcion:
-                  "Programas de capacitación y seguimiento para facilitar el retorno del individuo a su familia y entorno laboral.",
-              },
-              {
-                icono: <Star size={24} />,
-                titulo: "Formación comunitaria",
-                descripcion:
-                  "Talleres, charlas y diplomados para comunidades, instituciones y organizaciones que trabajan con poblaciones vulnerables.",
-              },
-              {
-                icono: <Heart size={24} />,
-                titulo: "Modelo de apadrinamiento",
-                descripcion:
-                  "Sistema de donaciones y patrocinio que permite atender a personas de escasos recursos sin costo para ellas.",
-              },
-            ].map((prog) => (
-              <div
-                key={prog.titulo}
-                className="rounded-2xl bg-white p-6 shadow-sm"
-              >
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
+            {PROGRAMAS.map((prog) => (
+              <div key={prog.titulo} className="rounded-2xl bg-white p-6 shadow-sm">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full text-white" style={{ backgroundColor: "#1A9B8A" }}>
                   {prog.icono}
                 </div>
-                <h3 className="text-base font-bold text-brand-gray-dark">
+                <h3 className="text-base font-bold" style={{ color: "#2E2A72" }}>
                   {prog.titulo}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-gray-dark/70">
@@ -247,18 +266,15 @@ export default function ProyectoRenacerPage() {
       {/* ── GALERÍA ── */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-brand-orange">
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#1A9B8A" }}>
             Nuestra labor
           </p>
-          <h2 className="mt-3 text-3xl font-black text-brand-gray-dark">
+          <h2 className="mt-3 text-3xl font-black" style={{ color: "#2E2A72" }}>
             Galería
           </h2>
           <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {FOTOS.map((foto, i) => (
-              <div
-                key={i}
-                className="relative aspect-square overflow-hidden rounded-2xl bg-brand-base"
-              >
+              <div key={i} className="relative aspect-square overflow-hidden rounded-2xl bg-gray-100">
                 <Image
                   src={foto}
                   alt={`Proyecto Renacer - actividad ${i + 1}`}
@@ -272,13 +288,20 @@ export default function ProyectoRenacerPage() {
         </div>
       </section>
 
-      {/* ── CONTACTO / CTA ── */}
-      <section className="bg-brand-orange py-20">
+      {/* ── CTA ── */}
+      <section className="py-20" style={{ backgroundColor: "#2E2A72" }}>
         <div className="mx-auto max-w-3xl px-6 text-center">
+          <Image
+            src="/logos/proyecto-renacer.png"
+            alt="Proyecto Renacer"
+            width={180}
+            height={58}
+            className="mx-auto mb-8 h-12 w-auto brightness-0 invert"
+          />
           <h2 className="text-3xl font-black text-white md:text-4xl">
             Apoya Proyecto Renacer
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/85">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/80">
             Tu apoyo transforma vidas. Puedes contribuir como apadrinador,
             voluntario o aliado institucional.
           </p>
@@ -287,7 +310,8 @@ export default function ProyectoRenacerPage() {
               href="https://proyectorenacerec.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-brand-orange transition-colors hover:bg-white/90"
+              className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: "#1A9B8A" }}
             >
               Visitar sitio oficial
               <ArrowRight size={15} />
