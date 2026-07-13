@@ -205,10 +205,10 @@ export default function ProyectoRenacerPage() {
             Nuestra misión
           </span>
           <blockquote className="mt-8 text-xl font-bold leading-relaxed text-white md:text-2xl">
-            "Contribuir a la prevención y atención de los seres humanos en
+            &ldquo;Contribuir a la prevención y atención de los seres humanos en
             situación de desequilibrio existencial a través de programas de
             salud integral — cuerpo, psique y espíritu — que les permitan
-            reinsertarse en la familia y la sociedad."
+            reinsertarse en la familia y la sociedad.&rdquo;
           </blockquote>
         </div>
       </section>
