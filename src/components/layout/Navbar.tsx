@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,6 +15,25 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
+  const [logoClicks, setLogoClicks] = useState(0);
+  const [easterEgg, setEasterEgg] = useState(false);
+  const pathname = usePathname();
+
+  // Clicks 1-7: silencio. Click 8: bola con "13". Luego 12,11...1. Siguiente: modal.
+  // Total: 7 silenciosos + 13 countdown + 1 final = 21 clicks
+  const SILENT = 7;
+  const TOTAL  = SILENT + 13 + 1; // 21
+  const countdown = logoClicks > SILENT ? TOTAL - logoClicks : null;
+  const showBall  = countdown !== null && countdown > 0;
+
+  const handleLogoClick = () => {
+    if (pathname !== "/") return;
+    setLogoClicks((n) => {
+      const next = n + 1;
+      if (next >= TOTAL) { setEasterEgg(true); return 0; }
+      return next;
+    });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -37,6 +57,7 @@ export default function Navbar() {
             height={55}
             priority
             className="h-10 w-auto"
+            onClick={handleLogoClick}
           />
         </Link>
 
@@ -255,6 +276,83 @@ export default function Navbar() {
                 Reservar cita
               </Button>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Easter egg — bola countdown */}
+      <AnimatePresence>
+        {showBall && (
+          <motion.div
+            key={countdown}
+            initial={{ scale: 1.4, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.6, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className="fixed inset-0 z-[90] flex items-center justify-center pointer-events-none"
+          >
+            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-brand-orange shadow-2xl">
+              <span className="text-4xl font-black text-white">{countdown}</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Easter egg modal */}
+      <AnimatePresence>
+        {easterEgg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4 backdrop-blur-sm"
+            onClick={() => setEasterEgg(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-sm rounded-3xl bg-white p-8 text-center shadow-2xl"
+            >
+              <button
+                onClick={() => setEasterEgg(false)}
+                className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-orange">
+                🥚 Easter egg desbloqueado
+              </div>
+
+              <div className="mx-auto mt-4 mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-brand-orange/20 bg-brand-orange/10">
+                <span className="text-3xl font-black text-brand-orange">JU</span>
+              </div>
+
+              <h2 className="text-lg font-black text-brand-gray-dark">
+                Jorge Urgilés Ruiz
+              </h2>
+              <p className="mt-1 text-sm text-brand-gray-dark/60">
+                Ingeniero en Software
+              </p>
+              <p className="mt-3 text-xs leading-relaxed text-brand-gray-dark/50">
+                Diseñado y desarrollado con dedicación.
+              </p>
+
+              <a
+                href="https://www.linkedin.com/in/jorge-andres-urgiles-ruiz/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#0A66C2] px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92ZM20.45 20v-6.4c0-3.43-1.83-5.03-4.27-5.03a3.7 3.7 0 0 0-3.33 1.83h-.05V8.5H9.59c.05 1.02 0 11.5 0 11.5h3.21v-6.43c0-.34.02-.68.13-.92.28-.68.91-1.39 1.97-1.39 1.39 0 1.94 1.06 1.94 2.6V20h3.61Z"/>
+                </svg>
+                Ver perfil en LinkedIn
+              </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
