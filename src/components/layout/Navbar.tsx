@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { NAV_LINKS, SUBMARCAS, RESP_SOCIAL_PROYECTOS, getWhatsappUrl } from "@/lib/constants";
+import { pushEvent } from "@/lib/gtm";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -157,7 +158,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:block">
-          <Button href={getWhatsappUrl()} target="_blank" rel="noopener noreferrer" size="sm">
+          <Button href={getWhatsappUrl()} target="_blank" rel="noopener noreferrer" size="sm" onClick={() => pushEvent("reservar_cita_click", { location: "navbar_desktop" })}>
             Reservar cita
           </Button>
         </div>
@@ -249,6 +250,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 w-full"
+                onClick={() => pushEvent("reservar_cita_click", { location: "navbar_mobile" })}
               >
                 Reservar cita
               </Button>

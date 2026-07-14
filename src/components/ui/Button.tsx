@@ -51,7 +51,7 @@ export default function Button({
   if (href) {
     return (
       <motion.div {...motionProps} className="inline-block">
-        <Link href={href} target={target} rel={rel} className={classes}>
+        <Link href={href} target={target} rel={rel} className={classes} onClick={onClick}>
           {children}
         </Link>
       </motion.div>

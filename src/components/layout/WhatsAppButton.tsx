@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { getWhatsappUrl, WHATSAPP_MESSAGES } from "@/lib/constants";
+import { pushEvent } from "@/lib/gtm";
 
 function WhatsAppIcon() {
   return (
@@ -18,6 +19,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
+      onClick={() => pushEvent("whatsapp_click", { location: "floating_button" })}
       initial={{ scale: 0.5, y: 20 }}
       animate={{ scale: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}

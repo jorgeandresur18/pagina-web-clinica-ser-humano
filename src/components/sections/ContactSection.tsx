@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Clock, MapPin, Phone } from "lucide-react";
 import { PHONE_NUMBER, CLINIC_ADDRESS, CLINIC_HOURS, CLINIC_MAPS_EMBED } from "@/lib/constants";
+import { pushEvent } from "@/lib/gtm";
 
 const CODIGOS_PAIS = [
   { code: "+593", label: "EC +593" },
@@ -72,6 +73,7 @@ export default function ContactSection() {
       });
       if (!res.ok) throw new Error();
       setStatus("ok");
+      pushEvent("contact_form_submit");
       setNombre(""); setTelefono(""); setMensaje("");
       setCodigo("+593"); setConsent(false); setErrors({});
     } catch {
@@ -247,7 +249,7 @@ export default function ContactSection() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={18} className="shrink-0 text-brand-orange" />
-                <a href={`tel:+${PHONE_NUMBER.replace(/\s/g, "")}`} className="text-sm text-brand-gray-dark hover:text-brand-orange">
+                <a href={`tel:+${PHONE_NUMBER.replace(/\s/g, "")}`} className="text-sm text-brand-gray-dark hover:text-brand-orange" onClick={() => pushEvent("phone_click", { location: "contact_section" })}>
                   {PHONE_NUMBER}
                 </a>
               </div>
