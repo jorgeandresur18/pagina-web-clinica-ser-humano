@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
 import { getWhatsappUrl, WHATSAPP_MESSAGES } from "@/lib/constants";
 import JsonLd from "@/components/seo/JsonLd";
-import { servicePageSchema, physicianSchema } from "@/lib/schemas";
+import { servicePageSchema, physicianSchema, breadcrumbSchema, faqSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
@@ -167,6 +167,17 @@ export default function PsicoterapiaPage() {
         url: "https://clinicaserhumano.ec/servicios/nadia-donadonibus",
         image: "https://clinicaserhumano.ec/nadia/nadia-hero.jpeg",
       })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
+        { name: "Dra. Nadia Donadonibus", url: "https://clinicaserhumano.ec/servicios/nadia-donadonibus" },
+      ])} />
+      <JsonLd data={faqSchema([
+        { q: "¿Qué tipo de psicoterapia ofrece la Dra. Nadia Donadonibus?", a: "La Dra. Nadia Donadonibus ofrece psicoterapia individual, de pareja y familiar, integrando el psicoanálisis con su Metodología Donado y la Metodología Galimberti, fruto de más de 40 años de experiencia en Italia y Ecuador." },
+        { q: "¿Atiende parejas y familias?", a: "Sí, la Dra. Nadia atiende procesos de psicoterapia de pareja y familiar, además de sesiones individuales, abordando conflictos relacionales, crisis y procesos de crecimiento personal." },
+        { q: "¿Las sesiones son presenciales u online?", a: "Se ofrecen sesiones tanto presenciales en Guayaquil como en modalidad online, adaptándose a las necesidades y disponibilidad de cada paciente." },
+        { q: "¿Cuánto dura el proceso terapéutico?", a: "La duración del proceso terapéutico varía según cada persona y sus objetivos. Tras una primera consulta de evaluación se define un plan de acompañamiento personalizado." },
+      ])} />
       <JsonLd data={physicianSchema({
         name: "Dra. Nadia Donadonibus",
         description: "Psicoterapeuta y psicoanalista con más de 40 años de experiencia en Italia y Ecuador. Creadora de la Metodología Donado.",

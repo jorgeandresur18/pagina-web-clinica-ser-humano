@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
 import { getWhatsappUrl, WHATSAPP_MESSAGES } from "@/lib/constants";
 import JsonLd from "@/components/seo/JsonLd";
-import { servicePageSchema } from "@/lib/schemas";
+import { servicePageSchema, breadcrumbSchema, faqSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
@@ -93,6 +93,17 @@ export default function ProgramaSERPage() {
         url: "https://clinicaserhumano.ec/servicios/programa-ser",
         image: "https://clinicaserhumano.ec/programaser/hero.png",
       })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
+        { name: "Programa SER Libre", url: "https://clinicaserhumano.ec/servicios/programa-ser" },
+      ])} />
+      <JsonLd data={faqSchema([
+        { q: "¿Qué es el Programa SER Libre?", a: "Es el único programa de Full Immersion en Ecuador para superar conductas adictivas sin encierro. Combina modalidad Day Hospital (horario diurno) y Afterwork (horario after office), permitiendo al paciente mantener su vida laboral durante el tratamiento." },
+        { q: "¿Qué conductas adictivas trata el Programa SER?", a: "El programa aborda adicciones a sustancias (alcohol, drogas), conductas compulsivas y otras dependencias comportamentales, con un enfoque integral que incluye detox, terapia psicoeducacional y neuromodulación." },
+        { q: "¿Se puede seguir trabajando durante el tratamiento?", a: "Sí. La modalidad Afterwork está diseñada específicamente para personas que necesitan mantener sus actividades laborales. Las sesiones se realizan en horario compatible con la jornada de trabajo." },
+        { q: "¿El programa usa psicofármacos?", a: "No. El Programa SER Libre trabaja sin psicofármacos convencionales, utilizando medicamentos biológicos y ortomoleculares junto con neuromodulación y terapia psicoeducacional para la recuperación." },
+      ])} />
       {/* ── HERO ── */}
       <section className="relative min-h-[580px] overflow-hidden lg:min-h-[660px]">
         <Image

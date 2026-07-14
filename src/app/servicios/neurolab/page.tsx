@@ -5,7 +5,7 @@ import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
 import { getWhatsappUrl, WHATSAPP_MESSAGES } from "@/lib/constants";
 import JsonLd from "@/components/seo/JsonLd";
-import { servicePageSchema } from "@/lib/schemas";
+import { servicePageSchema, breadcrumbSchema, faqSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
@@ -181,6 +181,17 @@ export default function NeuroLabPage() {
         url: "https://clinicaserhumano.ec/servicios/neurolab",
         image: "https://clinicaserhumano.ec/neurolab/hero.jpg",
       })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
+        { name: "NeuroLab", url: "https://clinicaserhumano.ec/servicios/neurolab" },
+      ])} />
+      <JsonLd data={faqSchema([
+        { q: "¿Qué es la estimulación cognitiva sensorial?", a: "Es un programa que combina estimulación multisensorial y ejercicios neurocognitivos para fortalecer la memoria, la atención y el bienestar mental, disponible en modalidad presencial y remota." },
+        { q: "¿Para quién está indicado NeuroLab?", a: "Está indicado para personas con deterioro cognitivo leve, adultos mayores que desean mantener su agilidad mental, y cualquier persona que quiera optimizar su rendimiento cognitivo y bienestar cerebral." },
+        { q: "¿NeuroLab tiene modalidad online?", a: "Sí, el programa NeuroLab ofrece tanto modalidad presencial en Guayaquil como modalidad remota, lo que permite acceder al programa desde cualquier lugar." },
+        { q: "¿Cuánto dura el programa NeuroLab?", a: "La duración varía según los objetivos y el perfil de cada persona. Tras una evaluación inicial se diseña un plan personalizado con la frecuencia e intensidad adecuadas." },
+      ])} />
       {/* ── HERO ── */}
       <section className="relative flex min-h-[620px] items-center">
         <Image

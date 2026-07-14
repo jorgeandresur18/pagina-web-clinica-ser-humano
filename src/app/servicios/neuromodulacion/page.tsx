@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
 import { getWhatsappUrl, WHATSAPP_MESSAGES } from "@/lib/constants";
 import JsonLd from "@/components/seo/JsonLd";
-import { servicePageSchema } from "@/lib/schemas";
+import { servicePageSchema, breadcrumbSchema, faqSchema } from "@/lib/schemas";
 import { buildMeta, BASE_URL } from "@/lib/seo";
 
 export const metadata = buildMeta({
@@ -103,6 +103,17 @@ export default function NeuroniPage() {
         url: "https://clinicaserhumano.ec/servicios/neuromodulacion",
         image: "https://clinicaserhumano.ec/fotos/neuroni-hero.png",
       })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
+        { name: "Neuroni · Neuromodulación", url: "https://clinicaserhumano.ec/servicios/neuromodulacion" },
+      ])} />
+      <JsonLd data={faqSchema([
+        { q: "¿Qué es la neuromodulación no invasiva?", a: "Es una técnica que regula la actividad del sistema nervioso mediante estímulos externos — sin agujas, sin cirugía y sin psicofármacos. Actúa directamente sobre los circuitos neurales para restaurar su equilibrio." },
+        { q: "¿Qué condiciones trata la neuromodulación?", a: "Trata ansiedad, depresión, estrés crónico, TDAH, insomnio, trauma, espectro autista, conducta impulsiva, migraña y TOC, entre otras condiciones del sistema nervioso." },
+        { q: "¿Cuántas sesiones se necesitan para ver resultados?", a: "Los resultados varían según cada persona y condición. Generalmente se observan mejoras desde las primeras sesiones, con un protocolo personalizado diseñado según el perfil neurológico de cada paciente." },
+        { q: "¿La neuromodulación tiene efectos secundarios?", a: "Al ser no invasiva y no utilizar psicofármacos, presenta un perfil de seguridad muy alto. Los protocolos están basados en evidencia clínica internacional y son adaptados individualmente." },
+      ])} />
       {/* ── HERO ── */}
       <section className="relative min-h-[640px] overflow-hidden lg:min-h-[700px]">
         <Image
