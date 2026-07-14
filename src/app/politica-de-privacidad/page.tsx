@@ -88,7 +88,8 @@ const SECCIONES = [
       <p>Recopila datos de comportamiento de navegación de forma anónima para generar estadísticas de uso del sitio. Las IPs se anonimizan automáticamente. Google puede transferir estos datos a sus servidores en Estados Unidos conforme a las salvaguardas establecidas en los <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener noreferrer">Términos de Procesamiento de Datos de Google</a>.</p>
       <p>Puedes desactivar el seguimiento de Google Analytics instalando el <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">complemento de inhabilitación de Google Analytics</a> para tu navegador.</p>
       <h3>Tabla de cookies</h3>
-      <table style="width:100%;border-collapse:collapse;font-size:0.85em;margin-top:8px">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:8px">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85em;min-width:560px">
         <thead>
           <tr style="background:#f5f5f3;text-align:left">
             <th style="padding:8px 10px;border:1px solid #e2e2de">Cookie</th>
@@ -136,6 +137,7 @@ const SECCIONES = [
           </tr>
         </tbody>
       </table>
+      </div>
     `,
   },
   {
