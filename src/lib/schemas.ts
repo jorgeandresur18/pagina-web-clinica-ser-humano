@@ -14,10 +14,25 @@ export const organizationSchema = {
   telephone: "+593969520111",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Bálsamos 210 y Todos Los Santos, Urdesa Central",
     addressLocality: "Guayaquil",
     addressRegion: "Guayas",
     addressCountry: "EC",
   },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "10:00",
+      closes: "19:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Saturday"],
+      opens: "10:00",
+      closes: "16:00",
+    },
+  ],
   sameAs: [
     "https://instagram.com/clinicaserhumanoec",
     "https://facebook.com/clinicaserhumano",

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MapPin, Phone } from "lucide-react";
-import { PHONE_NUMBER, CLINIC_MAPS_EMBED } from "@/lib/constants";
+import { Clock, MapPin, Phone } from "lucide-react";
+import { PHONE_NUMBER, CLINIC_ADDRESS, CLINIC_HOURS, CLINIC_MAPS_EMBED } from "@/lib/constants";
 
 const CODIGOS_PAIS = [
   { code: "+593", label: "EC +593" },
@@ -240,16 +240,26 @@ export default function ContactSection() {
               />
             </div>
 
-            <div className="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm">
+            <div className="flex flex-col gap-4 rounded-2xl bg-white p-5 shadow-sm">
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="mt-0.5 shrink-0 text-brand-orange" />
-                <p className="text-sm text-brand-gray-dark">Guayaquil, Ecuador</p>
+                <p className="text-sm text-brand-gray-dark">{CLINIC_ADDRESS}</p>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={18} className="shrink-0 text-brand-orange" />
                 <a href={`tel:+${PHONE_NUMBER.replace(/\s/g, "")}`} className="text-sm text-brand-gray-dark hover:text-brand-orange">
                   {PHONE_NUMBER}
                 </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <Clock size={18} className="mt-0.5 shrink-0 text-brand-orange" />
+                <div className="flex flex-col gap-0.5">
+                  {CLINIC_HOURS.map((h) => (
+                    <p key={h.dias} className="text-sm text-brand-gray-dark">
+                      <span className="font-medium">{h.dias}:</span> {h.horario}
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

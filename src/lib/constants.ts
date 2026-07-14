@@ -9,6 +9,11 @@ export const WHATSAPP_MESSAGES = {
 } as const;
 
 export const PHONE_NUMBER = "+593 969 520 111";
+export const CLINIC_ADDRESS = "Bálsamos 210 y Todos Los Santos, Urdesa Central, Guayaquil";
+export const CLINIC_HOURS = [
+  { dias: "Lunes – Viernes", horario: "10:00 – 19:00" },
+  { dias: "Sábados", horario: "10:00 – 16:00" },
+];
 export const CLINIC_MAPS_EMBED = "https://maps.google.com/maps?q=-2.1751971,-79.9077487&hl=es&z=17&output=embed";
 
 export function getWhatsappUrl(message: string = WHATSAPP_MESSAGES.home) {
