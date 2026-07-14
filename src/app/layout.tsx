@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import Script from "next/script";
 import { headers } from "next/headers";
@@ -17,7 +17,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://clinicaserhumano.ec"),
+  metadataBase: new URL("https://www.clinicaserhumano.ec"),
   title: {
     default: "Clínica Ser Humano | Recuperar equilibrio también es salud",
     template: "%s | Clínica Ser Humano",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Clínica Ser Humano",
     description: "Acompañamos procesos de recuperación y bienestar desde una visión humana, integral y clínicamente precisa en Guayaquil, Ecuador.",
-    url: "https://clinicaserhumano.ec",
+    url: "https://www.clinicaserhumano.ec",
     siteName: "Clínica Ser Humano",
     locale: "es_EC",
     type: "website",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: "Acompañamos procesos de recuperación y bienestar desde una visión humana, integral y clínicamente precisa en Guayaquil, Ecuador.",
     images: ["/fotos/nosotros-hero.png"],
   },
-  alternates: { canonical: "https://clinicaserhumano.ec" },
+  alternates: { canonical: "https://www.clinicaserhumano.ec" },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },

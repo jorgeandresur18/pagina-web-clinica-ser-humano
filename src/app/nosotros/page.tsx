@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 import ContactSection from "@/components/sections/ContactSection";
 import JsonLd from "@/components/seo/JsonLd";
@@ -52,8 +52,8 @@ export default function NosotrosPage() {
       <JsonLd data={servicePageSchema({
         name: "Nosotros · Clínica Ser Humano",
         description: "Institución con más de 30 años de experiencia en salud integral. Equipo multidisciplinario en Guayaquil, Ecuador.",
-        url: "https://clinicaserhumano.ec/nosotros",
-        image: "https://clinicaserhumano.ec/fotos/nosotros-hero.png",
+        url: "https://www.clinicaserhumano.ec/nosotros",
+        image: "https://www.clinicaserhumano.ec/fotos/nosotros-hero.png",
       })} />
       {/* ── HERO ── */}
       {/* Mobile: imagen con overlay */}

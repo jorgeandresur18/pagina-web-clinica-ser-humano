@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { Heart, MessageCircle, Shield, BookOpen, CheckCircle, Sparkles, Clock, ArrowRight, Award, GraduationCap } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
@@ -164,13 +164,13 @@ export default function PsicoterapiaPage() {
       <JsonLd data={servicePageSchema({
         name: "Dra. Nadia Donadonibus · Psicoterapeuta y Psicoanalista",
         description: "Más de 40 años acompañando procesos de sanación. Psicoterapia individual, familiar y de pareja en Guayaquil, Ecuador.",
-        url: "https://clinicaserhumano.ec/servicios/nadia-donadonibus",
-        image: "https://clinicaserhumano.ec/nadia/nadia-hero.jpeg",
+        url: "https://www.clinicaserhumano.ec/servicios/nadia-donadonibus",
+        image: "https://www.clinicaserhumano.ec/nadia/nadia-hero.jpeg",
       })} />
       <JsonLd data={breadcrumbSchema([
-        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
-        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
-        { name: "Dra. Nadia Donadonibus", url: "https://clinicaserhumano.ec/servicios/nadia-donadonibus" },
+        { name: "Inicio",    url: "https://www.clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://www.clinicaserhumano.ec/servicios" },
+        { name: "Dra. Nadia Donadonibus", url: "https://www.clinicaserhumano.ec/servicios/nadia-donadonibus" },
       ])} />
       <JsonLd data={faqSchema([
         { q: "¿Qué tipo de psicoterapia ofrece la Dra. Nadia Donadonibus?", a: "La Dra. Nadia Donadonibus ofrece psicoterapia individual, de pareja y familiar, integrando el psicoanálisis con su Metodología Donado y la Metodología Galimberti, fruto de más de 40 años de experiencia en Italia y Ecuador." },
@@ -181,8 +181,8 @@ export default function PsicoterapiaPage() {
       <JsonLd data={physicianSchema({
         name: "Dra. Nadia Donadonibus",
         description: "Psicoterapeuta y psicoanalista con más de 40 años de experiencia en Italia y Ecuador. Creadora de la Metodología Donado.",
-        url: "https://clinicaserhumano.ec/servicios/nadia-donadonibus",
-        image: "https://clinicaserhumano.ec/nadia/nadia-hero.jpeg",
+        url: "https://www.clinicaserhumano.ec/servicios/nadia-donadonibus",
+        image: "https://www.clinicaserhumano.ec/nadia/nadia-hero.jpeg",
         jobTitle: "Psicoterapeuta · Psicoanalista · Ms.C",
         specialty: "Psychology",
       })} />

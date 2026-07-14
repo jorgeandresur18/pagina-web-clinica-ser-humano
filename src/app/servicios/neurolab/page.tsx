@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import AnimatedStats, { type Stat } from "@/components/ui/AnimatedStats";
 import { Brain, Check, CheckCircle, Shield, Users, Zap, Wind, Clock, BookOpen, Network, Heart, Target, Flame } from "lucide-react";
 import Button from "@/components/ui/Button";
@@ -178,13 +178,13 @@ export default function NeuroLabPage() {
       <JsonLd data={servicePageSchema({
         name: "NeuroLab · Estimulación Cognitiva Sensorial",
         description: "Programa único de estimulación neurocognitiva sensorial en Ecuador. Fortalece tu memoria, atención y bienestar cognitivo.",
-        url: "https://clinicaserhumano.ec/servicios/neurolab",
-        image: "https://clinicaserhumano.ec/neurolab/hero.jpg",
+        url: "https://www.clinicaserhumano.ec/servicios/neurolab",
+        image: "https://www.clinicaserhumano.ec/neurolab/hero.jpg",
       })} />
       <JsonLd data={breadcrumbSchema([
-        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
-        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
-        { name: "NeuroLab", url: "https://clinicaserhumano.ec/servicios/neurolab" },
+        { name: "Inicio",    url: "https://www.clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://www.clinicaserhumano.ec/servicios" },
+        { name: "NeuroLab", url: "https://www.clinicaserhumano.ec/servicios/neurolab" },
       ])} />
       <JsonLd data={faqSchema([
         { q: "¿Qué es la estimulación cognitiva sensorial?", a: "Es un programa que combina estimulación multisensorial y ejercicios neurocognitivos para fortalecer la memoria, la atención y el bienestar mental, disponible en modalidad presencial y remota." },

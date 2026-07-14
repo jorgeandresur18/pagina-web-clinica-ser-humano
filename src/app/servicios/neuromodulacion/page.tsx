@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import AnimatedStats from "@/components/ui/AnimatedStats";
 import {
   Brain, Wind, Clock, BookOpen, Network, Heart, Flame, Target,
@@ -100,13 +100,13 @@ export default function NeuroniPage() {
       <JsonLd data={servicePageSchema({
         name: "Neuroni · Neuromodulación No Invasiva",
         description: "Regula tu sistema nervioso sin psicofármacos. Neuromodulación no invasiva con respaldo clínico en Guayaquil, Ecuador.",
-        url: "https://clinicaserhumano.ec/servicios/neuromodulacion",
-        image: "https://clinicaserhumano.ec/fotos/neuroni-hero.png",
+        url: "https://www.clinicaserhumano.ec/servicios/neuromodulacion",
+        image: "https://www.clinicaserhumano.ec/fotos/neuroni-hero.png",
       })} />
       <JsonLd data={breadcrumbSchema([
-        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
-        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
-        { name: "Neuroni · Neuromodulación", url: "https://clinicaserhumano.ec/servicios/neuromodulacion" },
+        { name: "Inicio",    url: "https://www.clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://www.clinicaserhumano.ec/servicios" },
+        { name: "Neuroni · Neuromodulación", url: "https://www.clinicaserhumano.ec/servicios/neuromodulacion" },
       ])} />
       <JsonLd data={faqSchema([
         { q: "¿Qué es la neuromodulación no invasiva?", a: "Es una técnica que regula la actividad del sistema nervioso mediante estímulos externos — sin agujas, sin cirugía y sin psicofármacos. Actúa directamente sobre los circuitos neurales para restaurar su equilibrio." },

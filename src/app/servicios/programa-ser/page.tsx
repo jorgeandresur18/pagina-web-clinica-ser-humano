@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { CheckCircle, Eye, Heart, Shield, Users } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
@@ -90,13 +90,13 @@ export default function ProgramaSERPage() {
       <JsonLd data={servicePageSchema({
         name: "Programa SER Libre · Conductas Adictivas",
         description: "Day Hospital y Afterwork para superar conductas adictivas sin encierro ni psicofármacos. Único programa de Full Immersion en Ecuador.",
-        url: "https://clinicaserhumano.ec/servicios/programa-ser",
-        image: "https://clinicaserhumano.ec/programaser/hero.png",
+        url: "https://www.clinicaserhumano.ec/servicios/programa-ser",
+        image: "https://www.clinicaserhumano.ec/programaser/hero.png",
       })} />
       <JsonLd data={breadcrumbSchema([
-        { name: "Inicio",    url: "https://clinicaserhumano.ec" },
-        { name: "Servicios", url: "https://clinicaserhumano.ec/servicios" },
-        { name: "Programa SER Libre", url: "https://clinicaserhumano.ec/servicios/programa-ser" },
+        { name: "Inicio",    url: "https://www.clinicaserhumano.ec" },
+        { name: "Servicios", url: "https://www.clinicaserhumano.ec/servicios" },
+        { name: "Programa SER Libre", url: "https://www.clinicaserhumano.ec/servicios/programa-ser" },
       ])} />
       <JsonLd data={faqSchema([
         { q: "¿Qué es el Programa SER Libre?", a: "Es el único programa de Full Immersion en Ecuador para superar conductas adictivas sin encierro. Combina modalidad Day Hospital (horario diurno) y Afterwork (horario after office), permitiendo al paciente mantener su vida laboral durante el tratamiento." },

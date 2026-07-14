@@ -1,4 +1,4 @@
-export const BASE_URL = "https://clinicaserhumano.ec";
+export const BASE_URL = "https://www.clinicaserhumano.ec";
 export const SITE_NAME = "Clínica Ser Humano";
 export const DEFAULT_OG_IMAGE = `${BASE_URL}/fotos/nosotros-hero.png`;
 
