@@ -5,39 +5,16 @@ import Link from "next/link";
 
 const CONSENT_KEY = "sh_cookie_consent";
 
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-  }
-}
-
-function loadGTM() {
-  if (typeof window === "undefined") return;
-  if (document.getElementById("gtm-sh")) return;
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-  const script = document.createElement("script");
-  script.id = "gtm-sh";
-  script.async = true;
-  script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-PVFCTMQ6";
-  document.head.appendChild(script);
-}
-
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem(CONSENT_KEY);
-    if (consent === "accepted") {
-      loadGTM();
-    } else if (!consent) {
-      setVisible(true);
-    }
+    if (!consent) setVisible(true);
   }, []);
 
   const accept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted");
-    loadGTM();
     setVisible(false);
   };
 
