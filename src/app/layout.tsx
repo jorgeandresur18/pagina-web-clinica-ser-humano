@@ -88,14 +88,6 @@ export default function RootLayout({
         />
       </head>
       <body className={`${outfit.variable} font-sans antialiased bg-brand-base text-brand-gray-dark`}>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PVFCTMQ6"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
         {!isAdmin && <JsonLd data={organizationSchema} />}
         {!isAdmin && <JsonLd data={websiteSchema} />}
         {!isAdmin && <Navbar />}
