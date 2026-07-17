@@ -230,112 +230,56 @@ const fadeUp = {
   transition: { duration: 0.45, ease: "easeOut" as const },
 };
 
-// ── Mario Easter Egg ──────────────────────────────────────────────────────────
-const MARIO_CLR: Record<string, string> = {
-  R: "#E52B12", S: "#FFB366", B: "#7A3210", L: "#0B3FAD",
-};
-const MF1 = `
-....RRRR....
-...RRRRRRRR.
-...BBBSSBS..
-..BSBSSSSBS.
-..BSSSSSSB..
-...SSSSSS...
-...RRBRRR...
-..RRRRRRRR..
-.RRSRRRSR...
-.RR.SSRRR...
-....SSSS....
-...LLLLL....
-..LLLLLLL...
-..LLBBLLLL..
-..LBB.BBL...
-.BB...BB....`.trim().split("\n");
-const MF2 = `
-....RRRR....
-...RRRRRRRR.
-...BBBSSBS..
-..BSBSSSSBS.
-..BSSSSSSB..
-...SSSSSS...
-...RRBRRR...
-..RRRRRRRR..
-.RRSRRRSR...
-RRRRSSS.....
-....LLL.....
-...LLLL.....
-..LLLLL.....
-..LLBBB.....
-..LBB.BB....
-.BB.........`.trim().split("\n");
-const MPX = 5;
-function marioShadow(rows: string[]) {
-  return rows
-    .flatMap((row, y) =>
-      row.split("").flatMap((c, x) =>
-        MARIO_CLR[c] ? [`${x * MPX}px ${y * MPX}px 0 ${MPX - 1}px ${MARIO_CLR[c]}`] : []
-      )
-    )
-    .join(",");
-}
-function MarioEgg({ onClose }: { onClose: () => void }) {
-  const [frm, setFrm] = useState(0);
-  const [blink, setBlink] = useState(true);
-  const [pos, setPos] = useState(-60);
-  useEffect(() => {
-    const t = setInterval(() => setFrm((f) => 1 - f), 180);
-    return () => clearInterval(t);
-  }, []);
-  useEffect(() => {
-    const t = setInterval(() => setBlink((b) => !b), 500);
-    return () => clearInterval(t);
-  }, []);
-  useEffect(() => {
-    let x = -60;
-    const t = setInterval(() => {
-      x = x >= 340 ? -60 : x + 3;
-      setPos(x);
-    }, 30);
-    return () => clearInterval(t);
-  }, []);
-  const sh = marioShadow(frm === 0 ? MF1 : MF2);
+// ── Easter egg: juego NES embebido desde Internet Archive ────────────────────
+function NesGameModal({ onClose }: { onClose: () => void }) {
   return (
     <div
-      style={{ position: "fixed", inset: 0, zIndex: 300, background: "rgba(0,0,0,0.88)", display: "flex", alignItems: "center", justifyContent: "center" }}
+      style={{ position: "fixed", inset: 0, zIndex: 300, background: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center", padding: "12px" }}
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        style={{ background: "#000084", border: "4px solid #FFF", width: 340, overflow: "hidden", fontFamily: "'Courier New', monospace", userSelect: "none", position: "relative" }}
+        style={{ background: "#111", border: "2px solid #444", borderRadius: 6, overflow: "hidden", width: "100%", maxWidth: 620, fontFamily: "'Courier New', monospace" }}
       >
-        <button onClick={onClose} style={{ position: "absolute", top: 6, right: 10, color: "#FFF", background: "none", border: "none", fontSize: 18, cursor: "pointer", zIndex: 1, lineHeight: 1 }}>✕</button>
-        <div style={{ background: "#000084", padding: "10px 16px 6px", display: "flex", justifyContent: "space-between", color: "#FFF", fontSize: 10, letterSpacing: "0.08em" }}>
-          <div><div>MARIO</div><div>040000</div></div>
-          <div style={{ textAlign: "center" }}><div>🍄×03</div><div style={{ color: "#FF0" }}>TIME 399</div></div>
-          <div style={{ textAlign: "right" }}><div>WORLD</div><div>1&nbsp;-&nbsp;1</div></div>
+        {/* Barra de título */}
+        <div style={{ background: "#1c1c1c", padding: "8px 14px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #333" }}>
+          <span style={{ color: "#FFF", fontSize: 13, letterSpacing: "0.08em" }}>
+            🎮 &nbsp;SUPER MARIO BROS — NES
+          </span>
+          <button
+            onClick={onClose}
+            style={{ color: "#AAA", background: "none", border: "none", fontSize: 20, cursor: "pointer", lineHeight: 1, padding: "0 2px" }}
+            aria-label="Cerrar"
+          >
+            ✕
+          </button>
         </div>
-        <div style={{ position: "relative", height: 170, background: "#5C94FC", overflow: "hidden" }}>
-          {[{ l: 28, t: 14 }, { l: 195, t: 22 }].map(({ l, t }, i) => (
-            <div key={i} style={{ position: "absolute", left: l, top: t }}>
-              <div style={{ width: 44, height: 12, background: "#FFF", borderRadius: 5 }} />
-              <div style={{ width: 64, height: 18, background: "#FFF", borderRadius: 7, marginTop: -6, marginLeft: -10 }} />
-            </div>
-          ))}
-          <div style={{ position: "absolute", left: 148, top: 42, width: 30, height: 30, background: "#E8A020", border: "2px solid #7A4400", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", color: "#FFF", fontSize: 16 }}>?</div>
-          <div style={{ position: "absolute", bottom: 18, left: pos }}>
-            <div style={{ width: 1, height: 1, boxShadow: sh }} />
+
+        {/* Juego embebido desde Internet Archive */}
+        <iframe
+          src="https://archive.org/embed/SuperMarioBros_NES?autoplay=1"
+          style={{ width: "100%", height: 400, border: "none", display: "block", background: "#000" }}
+          allowFullScreen
+          title="Super Mario Bros NES"
+          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups"
+        />
+
+        {/* Controles */}
+        <div style={{ background: "#181818", padding: "12px 16px", borderTop: "1px solid #2a2a2a" }}>
+          <div style={{ color: "#FAFF00", fontSize: 10, letterSpacing: "0.12em", marginBottom: 8 }}>
+            CONTROLES DE TECLADO
           </div>
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 18, background: "#C07028", borderTop: "3px solid #7A4810", display: "flex" }}>
-            {Array.from({ length: 11 }).map((_, i) => (
-              <div key={i} style={{ flex: 1, borderRight: "1px solid #7A4810" }} />
-            ))}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5px 24px", fontSize: 11, color: "#CCC", lineHeight: 1.6 }}>
+            <span><span style={{ color: "#FFF" }}>← →</span> &nbsp;Mover</span>
+            <span><span style={{ color: "#FFF" }}>X</span> &nbsp;Saltar (botón A)</span>
+            <span><span style={{ color: "#FFF" }}>↓</span> &nbsp;Agacharse</span>
+            <span><span style={{ color: "#FFF" }}>Z</span> &nbsp;Correr / disparar (botón B)</span>
+            <span><span style={{ color: "#FFF" }}>Enter</span> &nbsp;Start</span>
+            <span><span style={{ color: "#FFF" }}>Backspace</span> &nbsp;Select</span>
           </div>
-        </div>
-        <div style={{ background: "#000055", padding: "16px", textAlign: "center", color: "#FFF" }}>
-          <div style={{ fontSize: 18, fontWeight: "bold", letterSpacing: "0.12em", color: "#FAFF00", marginBottom: 4 }}>¡NADIA POWER!</div>
-          <div style={{ fontSize: 9, color: "#8090C0", marginBottom: 12 }}>secreto desbloqueado · 40 clics</div>
-          <div style={{ fontSize: 12, letterSpacing: "0.1em", opacity: blink ? 1 : 0 }}>▶ PRESS START ◀</div>
-          <div style={{ fontSize: 9, color: "#556080", marginTop: 8 }}>clic en cualquier lugar para salir</div>
+          <div style={{ marginTop: 10, fontSize: 9, color: "#555" }}>
+            Haz clic dentro del juego primero para que capture el teclado · secreto: 40 clics en la foto de Nadia
+          </div>
         </div>
       </div>
     </div>
@@ -344,7 +288,7 @@ function MarioEgg({ onClose }: { onClose: () => void }) {
 
 export default function Home() {
   const [, setNadiaClicks] = useState(0);
-  const [marioEgg, setMarioEgg] = useState(false);
+  const [nesOpen, setNesOpen] = useState(false);
   return (
     <>
       {/* SECCIÓN 1 — HERO */}
@@ -613,7 +557,7 @@ export default function Home() {
                       ? () => {
                           setNadiaClicks((n) => {
                             const next = n + 1;
-                            if (next >= 40) { setMarioEgg(true); return 0; }
+                            if (next >= 40) { setNesOpen(true); return 0; }
                             return next;
                           });
                         }
@@ -710,7 +654,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {marioEgg && <MarioEgg onClose={() => setMarioEgg(false)} />}
+      {nesOpen && <NesGameModal onClose={() => setNesOpen(false)} />}
     </>
   );
 }
