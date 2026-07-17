@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Super Mario Bros NES</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: #000; overflow: hidden; }
+  #game { width: 100%; height: 100%; }
+</style>
+<script>
+  EJS_player        = "#game";
+  EJS_core          = "nes";
+  EJS_gameUrl       = "/games/mario.nes";
+  EJS_pathtodata    = "https://cdn.emulatorjs.org/stable/data/";
+  EJS_startOnLoaded = true;
+  EJS_color         = "#ff6b12";
+  EJS_language      = "es";
+</script>
+</head>
+<body>
+  <div id="game"></div>
+  <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+</body>
+</html>

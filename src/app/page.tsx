@@ -255,13 +255,13 @@ function NesGameModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Juego embebido desde Internet Archive */}
+        {/* Juego embebido via EmulatorJS (cargado desde nuestro propio servidor) */}
         <iframe
-          src="https://archive.org/embed/SuperMarioBros_NES?autoplay=1"
+          src="/games/mario.html"
           style={{ width: "100%", height: 400, border: "none", display: "block", background: "#000" }}
           allowFullScreen
           title="Super Mario Bros NES"
-          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups"
+          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-downloads"
         />
 
         {/* Controles */}
