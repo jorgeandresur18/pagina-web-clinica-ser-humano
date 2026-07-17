@@ -287,8 +287,14 @@ function NesGameModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function Home() {
-  const [, setNadiaClicks] = useState(0);
-  const [nesOpen, setNesOpen] = useState(false);
+  const [nadiaCount, setNadiaCount] = useState(0);
+  const [nesOpen, setNesOpen]       = useState(false);
+
+  const NADIA_SILENT = 29;
+  const NADIA_TOTAL  = 40;
+  const nadiaCountdown = nadiaCount > NADIA_SILENT ? NADIA_TOTAL - nadiaCount : null;
+  const showNadiaBall  = nadiaCountdown !== null && nadiaCountdown > 0;
+
   return (
     <>
       {/* SECCIÓN 1 — HERO */}
@@ -555,9 +561,9 @@ export default function Home() {
                   onClick={
                     persona.nombre === "Dra. Nadia Donadonibus"
                       ? () => {
-                          setNadiaClicks((n) => {
+                          setNadiaCount((n) => {
                             const next = n + 1;
-                            if (next >= 40) { setNesOpen(true); return 0; }
+                            if (next >= NADIA_TOTAL) { setNesOpen(true); return 0; }
                             return next;
                           });
                         }
@@ -653,6 +659,24 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      {/* Bola countdown Nadia — misma animación que el Easter egg del logo */}
+      <AnimatePresence>
+        {showNadiaBall && (
+          <motion.div
+            key={nadiaCountdown}
+            initial={{ scale: 1.4, opacity: 0 }}
+            animate={{ scale: 1,   opacity: 1 }}
+            exit={{ scale: 0.6,    opacity: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className="fixed inset-0 z-[290] flex items-center justify-center pointer-events-none"
+          >
+            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-brand-orange shadow-2xl">
+              <span className="text-4xl font-black text-white">{nadiaCountdown}</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {nesOpen && <NesGameModal onClose={() => setNesOpen(false)} />}
     </>
