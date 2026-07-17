@@ -1,12 +1,12 @@
 ﻿import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
-import Script from "next/script";
 import { headers } from "next/headers";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import CookieBanner from "@/components/layout/CookieBanner";
+import HighLevelWidget from "@/components/layout/HighLevelWidget";
 import JsonLd from "@/components/seo/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schemas";
 
@@ -95,14 +95,7 @@ export default function RootLayout({
         {!isAdmin && <Footer />}
         {!isAdmin && <WhatsAppButton />}
         {!isAdmin && <CookieBanner />}
-        {!isAdmin && (
-          <Script
-            src="https://widgets.leadconnectorhq.com/loader.js"
-            data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-            data-widget-id="6a46860d686a90131bee5f0f"
-            strategy="lazyOnload"
-          />
-        )}
+        {!isAdmin && <HighLevelWidget />}
       </body>
     </html>
   );
