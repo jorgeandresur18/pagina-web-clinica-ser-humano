@@ -241,15 +241,17 @@ function NesGameModal({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      style={{ position: "fixed", inset: 0, zIndex: 300, background: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center", padding: "12px" }}
+      className="fixed inset-0 z-[300] flex flex-col md:items-center md:justify-center md:p-3"
+      style={{ background: "rgba(0,0,0,0.92)" }}
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        style={{ background: "#111", border: "2px solid #444", borderRadius: 6, overflow: "hidden", width: "100%", maxWidth: 620, fontFamily: "'Courier New', monospace" }}
+        className="flex flex-col w-full h-full md:h-auto md:max-w-[620px] md:rounded-md overflow-hidden"
+        style={{ background: "#111", fontFamily: "'Courier New', monospace" }}
       >
         {/* Barra de título */}
-        <div style={{ background: "#1c1c1c", padding: "8px 14px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #333" }}>
+        <div style={{ background: "#1c1c1c", padding: "8px 14px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #333", flexShrink: 0 }}>
           <span style={{ color: "#FFF", fontSize: 13, letterSpacing: "0.08em" }}>
             🎮 &nbsp;SUPER MARIO BROS — NES
           </span>
@@ -262,11 +264,12 @@ function NesGameModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Juego embebido via EmulatorJS */}
+        {/* Juego — flex-1 en móvil para llenar la pantalla, altura fija en desktop */}
         <iframe
           ref={iframeRef}
           src="/games/mario.html"
-          style={{ width: "100%", height: 400, border: "none", display: "block", background: "#000" }}
+          className="w-full flex-1 md:flex-none md:h-[420px] block"
+          style={{ border: "none", background: "#000" }}
           allowFullScreen
           title="Super Mario Bros NES"
           sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-downloads"

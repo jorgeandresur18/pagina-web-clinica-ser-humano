@@ -5,180 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Super Mario Bros NES</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; outline:none; }
+  * { margin:0; padding:0; box-sizing:border-box; }
   html, body { width:100%; height:100%; background:#000; overflow:hidden; }
+  #game { width:100%; height:100%; }
 
-  #wrap { display:flex; flex-direction:column; width:100%; height:100%; }
-  #game { flex:1; min-height:0; width:100%; }
-
-  /* ── Overlay "tap para jugar" ───────────────────── */
   #start-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
+    position: fixed; inset: 0; z-index: 200;
     background: rgba(0,0,0,0.72);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    touch-action: none;
-    font-family: monospace;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; touch-action: none; font-family: monospace;
   }
-
-  .overlay-inner { text-align: center; color: #FFF; user-select: none; }
-  .overlay-icon  { font-size: 36px; margin-bottom: 12px; }
-  .overlay-title { font-size: 15px; letter-spacing: 0.14em; }
-  .overlay-blink {
-    font-size: 11px; letter-spacing: 0.1em;
-    color: #ff6b12; margin-top: 10px;
+  .ov { text-align:center; color:#FFF; user-select:none; }
+  .ov-icon  { font-size:36px; margin-bottom:12px; }
+  .ov-title { font-size:15px; letter-spacing:0.14em; }
+  .ov-blink {
+    font-size:11px; letter-spacing:0.1em; color:#ff6b12; margin-top:10px;
     animation: blink 0.9s step-end infinite;
   }
-  @keyframes blink { 0%,100%{ opacity:1 } 50%{ opacity:0 } }
-
-  /* ── Pad táctil ─────────────────────────────────── */
-  #pad {
-    display: none;
-    background: #111;
-    height: 168px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-top: 1px solid #2a2a2a;
-  }
-  @media (pointer: coarse) { #pad { display: flex; } }
-
-  .dpad { position:relative; width:128px; height:128px; flex-shrink:0; }
-
-  .dp {
-    position:absolute; width:40px; height:40px;
-    background:#2e2e2e; border:1px solid #4a4a4a;
-    display:flex; align-items:center; justify-content:center;
-    color:#ccc; font-size:15px;
-    touch-action:none; -webkit-user-select:none; user-select:none;
-  }
-  .dp:active { background:#555; color:#fff; }
-
-  .dp-up { top:0;    left:44px; border-radius:5px 5px 0 0; }
-  .dp-dn { top:88px; left:44px; border-radius:0 0 5px 5px; }
-  .dp-lt { top:44px; left:0;    border-radius:5px 0 0 5px; }
-  .dp-rt { top:44px; left:88px; border-radius:0 5px 5px 0; }
-  .dp-md { top:44px; left:44px; background:#1a1a1a; border-color:#2e2e2e; pointer-events:none; }
-
-  .sys-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; }
-  .sys-btn {
-    background:#383838; border:1px solid #555; border-radius:30px;
-    color:#bbb; font-size:9px; font-family:monospace; letter-spacing:0.1em;
-    padding:6px 16px; cursor:pointer;
-    touch-action:none; -webkit-user-select:none; user-select:none;
-    -webkit-appearance:none; appearance:none;
-  }
-  .sys-btn:active { background:#555; color:#fff; }
-
-  .ab-wrap { display:flex; align-items:center; gap:14px; flex-shrink:0; }
-  .action {
-    width:56px; height:56px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-weight:bold; font-size:20px; color:#fff;
-    border:2px solid rgba(255,255,255,0.12);
-    touch-action:none; -webkit-user-select:none; user-select:none; cursor:pointer;
-  }
-  .btn-b { background:#8b1020; }
-  .btn-a { background:#c01030; }
-  .action:active { filter:brightness(1.5); }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 </style>
 </head>
 <body>
-<div id="wrap">
   <div id="game"></div>
 
-  <div id="pad">
-    <div class="dpad">
-      <div class="dp dp-up" data-key="ArrowUp"    data-code="ArrowUp"    data-kc="38">▲</div>
-      <div class="dp dp-lt" data-key="ArrowLeft"  data-code="ArrowLeft"  data-kc="37">◀</div>
-      <div class="dp dp-md"></div>
-      <div class="dp dp-rt" data-key="ArrowRight" data-code="ArrowRight" data-kc="39">▶</div>
-      <div class="dp dp-dn" data-key="ArrowDown"  data-code="ArrowDown"  data-kc="40">▼</div>
-    </div>
-
-    <div class="sys-wrap">
-      <button class="sys-btn" type="button" data-key="Shift" data-code="ShiftLeft" data-kc="16">SELECT</button>
-      <button class="sys-btn" type="button" data-key="Enter" data-code="Enter"     data-kc="13">START</button>
-    </div>
-
-    <div class="ab-wrap">
-      <div class="action btn-a" data-key="x" data-code="KeyX" data-kc="88">B</div>
-      <div class="action btn-b" data-key="z" data-code="KeyZ" data-kc="90">A</div>
+  <div id="start-overlay">
+    <div class="ov">
+      <div class="ov-icon">🎮</div>
+      <div class="ov-title">SUPER MARIO BROS</div>
+      <div class="ov-blink">▶ TAP / CLICK PARA JUGAR ◀</div>
     </div>
   </div>
-</div>
-
-<!-- Overlay: desaparece al primer toque/click y da foco al canvas -->
-<div id="start-overlay">
-  <div class="overlay-inner">
-    <div class="overlay-icon">🎮</div>
-    <div class="overlay-title">SUPER MARIO BROS</div>
-    <div class="overlay-blink">▶ TAP / CLICK PARA JUGAR ◀</div>
-  </div>
-</div>
 
 <script>
-  /* ── EmulatorJS config ──────────────────────────── */
-  EJS_player           = "#game";
-  EJS_core             = "nes";
-  EJS_gameUrl          = "/games/mario.nes";
-  EJS_pathtodata       = "https://cdn.emulatorjs.org/stable/data/";
-  EJS_startOnLoaded    = true;
-  EJS_color            = "#ff6b12";
-  EJS_language         = "es";
-  EJS_VirtualGamepad   = false;
+  EJS_player        = "#game";
+  EJS_core          = "nes";
+  EJS_gameUrl       = "/games/mario.nes";
+  EJS_pathtodata    = "https://cdn.emulatorjs.org/stable/data/";
+  EJS_startOnLoaded = true;
+  EJS_color         = "#ff6b12";
+  EJS_language      = "es";
 
-  /* ── Foco en el canvas de EmulatorJS ────────────── */
   function focusCanvas() {
     var c = document.querySelector('canvas');
-    if (c) {
-      if (!c.getAttribute('tabindex')) c.setAttribute('tabindex', '0');
-      c.focus();
-    }
+    if (c) { if (!c.getAttribute('tabindex')) c.setAttribute('tabindex','0'); c.focus(); }
   }
 
-  /* ── Overlay: primer toque desbloquea controles ─── */
-  var overlay = document.getElementById('start-overlay');
-
-  function dismissOverlay() {
-    if (!overlay) return;
-    overlay.style.display = 'none';
-    focusCanvas();
-  }
-
-  overlay.addEventListener('click',    dismissOverlay);
-  overlay.addEventListener('touchend', function(e) {
-    e.preventDefault();
-    dismissOverlay();
-  }, { passive: false });
-
-  /* ── Controles táctiles ─────────────────────────── */
-  function fire(key, code, kc, down) {
-    if (down) focusCanvas();
-    var type = down ? 'keydown' : 'keyup';
-    var opts = { key:key, code:code, keyCode:kc, which:kc, bubbles:true, cancelable:true };
-    if (key === 'Shift') opts.shiftKey = down;
-    document.dispatchEvent(new KeyboardEvent(type, opts));
-    var c = document.querySelector('canvas');
-    if (c) c.dispatchEvent(new KeyboardEvent(type, opts));
-  }
-
-  document.querySelectorAll('[data-key]').forEach(function(el) {
-    var k  = el.dataset.key;
-    var co = el.dataset.code;
-    var kc = parseInt(el.dataset.kc, 10);
-    el.addEventListener('touchstart',  function(e){ e.preventDefault(); fire(k,co,kc,true);  }, {passive:false});
-    el.addEventListener('touchend',    function(e){ e.preventDefault(); fire(k,co,kc,false); }, {passive:false});
-    el.addEventListener('touchcancel', function(e){ e.preventDefault(); fire(k,co,kc,false); }, {passive:false});
-    el.addEventListener('mousedown',   function(){ fire(k,co,kc,true);  });
-    el.addEventListener('mouseup',     function(){ fire(k,co,kc,false); });
-    el.addEventListener('mouseleave',  function(){ fire(k,co,kc,false); });
-  });
+  var ov = document.getElementById('start-overlay');
+  function dismiss() { ov.style.display='none'; focusCanvas(); }
+  ov.addEventListener('click', dismiss);
+  ov.addEventListener('touchend', function(e){ e.preventDefault(); dismiss(); }, {passive:false});
 </script>
 <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
 </body>
