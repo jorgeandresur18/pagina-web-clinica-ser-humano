@@ -87,7 +87,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${outfit.variable} font-sans antialiased bg-brand-base text-brand-gray-dark`}>
+      <body suppressHydrationWarning className={`${outfit.variable} font-sans antialiased bg-brand-base text-brand-gray-dark`}>
         {!isAdmin && <JsonLd data={organizationSchema} />}
         {!isAdmin && <JsonLd data={websiteSchema} />}
         {!isAdmin && <Navbar />}
