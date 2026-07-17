@@ -44,6 +44,41 @@ function ZeldaGameModal({ onClose }: { onClose: () => void }) {
           title="The Legend of Zelda NES"
           sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-downloads"
         />
+        {/* Controles — solo desktop */}
+        <div
+          className="hidden md:flex items-center justify-center gap-5 px-4 py-3 flex-shrink-0"
+          style={{ background: "#181818", borderTop: "1px solid #2a2a2a" }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+            <div style={{ display: "flex" }}>
+              <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>↑</span>
+            </div>
+            <div style={{ display: "flex", gap: 2 }}>
+              {["←","↓","→"].map(k => (
+                <span key={k} style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
+              ))}
+            </div>
+          </div>
+          <span style={{ fontSize: 9, color: "#555", letterSpacing: "0.1em" }}>MOVER</span>
+          <span style={{ display: "block", width: 1, height: 30, background: "#333", flexShrink: 0 }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {[["Z","B"],["X","A"]].map(([k,l]) => (
+              <span key={k} style={{ display:"flex", alignItems:"center", gap:4 }}>
+                <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
+                <span style={{ fontSize:10, color:"#888" }}>{l}</span>
+              </span>
+            ))}
+          </div>
+          <span style={{ display: "block", width: 1, height: 30, background: "#333", flexShrink: 0 }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {[["Enter","Start"],["Bksp","Sel"]].map(([k,l]) => (
+              <span key={k} style={{ display:"flex", alignItems:"center", gap:4 }}>
+                <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 4px", fontSize:10, color:"#ccc", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
+                <span style={{ fontSize:10, color:"#888" }}>{l}</span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

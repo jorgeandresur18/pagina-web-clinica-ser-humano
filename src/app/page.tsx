@@ -275,21 +275,39 @@ function NesGameModal({ onClose }: { onClose: () => void }) {
           sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-downloads"
         />
 
-        {/* Controles — solo visible en desktop */}
-        <div className="hidden md:block" style={{ background: "#181818", padding: "12px 16px", borderTop: "1px solid #2a2a2a" }}>
-          <div style={{ color: "#FAFF00", fontSize: 10, letterSpacing: "0.12em", marginBottom: 8 }}>
-            CONTROLES DE TECLADO
+        {/* Controles — solo desktop */}
+        <div
+          className="hidden md:flex items-center justify-center gap-5 px-4 py-3 flex-shrink-0"
+          style={{ background: "#181818", borderTop: "1px solid #2a2a2a" }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+            <div style={{ display: "flex" }}>
+              <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>↑</span>
+            </div>
+            <div style={{ display: "flex", gap: 2 }}>
+              {["←","↓","→"].map(k => (
+                <span key={k} style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
+              ))}
+            </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5px 24px", fontSize: 11, color: "#CCC", lineHeight: 1.6 }}>
-            <span><span style={{ color: "#FFF" }}>← →</span> &nbsp;Mover</span>
-            <span><span style={{ color: "#FFF" }}>X</span> &nbsp;Saltar (botón A)</span>
-            <span><span style={{ color: "#FFF" }}>↓</span> &nbsp;Agacharse</span>
-            <span><span style={{ color: "#FFF" }}>Z</span> &nbsp;Correr / disparar (botón B)</span>
-            <span><span style={{ color: "#FFF" }}>Enter</span> &nbsp;Start</span>
-            <span><span style={{ color: "#FFF" }}>Backspace</span> &nbsp;Select</span>
+          <span style={{ fontSize: 9, color: "#555", letterSpacing: "0.1em" }}>MOVER</span>
+          <span style={{ display: "block", width: 1, height: 30, background: "#333", flexShrink: 0 }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {[["Z","B"],["X","A"]].map(([k,l]) => (
+              <span key={k} style={{ display:"flex", alignItems:"center", gap:4 }}>
+                <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
+                <span style={{ fontSize:10, color:"#888" }}>{l}</span>
+              </span>
+            ))}
           </div>
-          <div style={{ marginTop: 10, fontSize: 9, color: "#555" }}>
-            Haz clic dentro del juego primero para que capture el teclado · secreto: 40 clics en la foto de Nadia
+          <span style={{ display: "block", width: 1, height: 30, background: "#333", flexShrink: 0 }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {[["Enter","Start"],["Bksp","Sel"]].map(([k,l]) => (
+              <span key={k} style={{ display:"flex", alignItems:"center", gap:4 }}>
+                <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 4px", fontSize:10, color:"#ccc", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
+                <span style={{ fontSize:10, color:"#888" }}>{l}</span>
+              </span>
+            ))}
           </div>
         </div>
       </div>
