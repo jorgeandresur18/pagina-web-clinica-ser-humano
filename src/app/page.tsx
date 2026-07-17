@@ -264,8 +264,8 @@ function NesGameModal({ onClose }: { onClose: () => void }) {
           sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-downloads"
         />
 
-        {/* Controles */}
-        <div style={{ background: "#181818", padding: "12px 16px", borderTop: "1px solid #2a2a2a" }}>
+        {/* Controles — solo visible en desktop */}
+        <div className="hidden md:block" style={{ background: "#181818", padding: "12px 16px", borderTop: "1px solid #2a2a2a" }}>
           <div style={{ color: "#FAFF00", fontSize: 10, letterSpacing: "0.12em", marginBottom: 8 }}>
             CONTROLES DE TECLADO
           </div>
