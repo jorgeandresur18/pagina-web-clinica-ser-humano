@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Activity, AlertTriangle, Brain, ChevronLeft, ChevronRight, Clock, CloudRain,
@@ -232,6 +232,13 @@ const fadeUp = {
 
 // ── Easter egg: juego NES embebido desde Internet Archive ────────────────────
 function NesGameModal({ onClose }: { onClose: () => void }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const t = setTimeout(() => iframeRef.current?.focus(), 300);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div
       style={{ position: "fixed", inset: 0, zIndex: 300, background: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center", padding: "12px" }}
@@ -255,8 +262,9 @@ function NesGameModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Juego embebido via EmulatorJS (cargado desde nuestro propio servidor) */}
+        {/* Juego embebido via EmulatorJS */}
         <iframe
+          ref={iframeRef}
           src="/games/mario.html"
           style={{ width: "100%", height: 400, border: "none", display: "block", background: "#000" }}
           allowFullScreen
