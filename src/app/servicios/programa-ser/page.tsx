@@ -1,5 +1,4 @@
 ﻿import Image from "next/image";
-import KirbyEasterEgg from "@/components/ui/KirbyEasterEgg";
 import { CheckCircle, Eye, Heart, Shield, Users } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ContactSection from "@/components/sections/ContactSection";
@@ -465,35 +464,31 @@ export default function ProgramaSERPage() {
                 objPos: "center 10%",
                 zoom: 1.3,
               },
-            ].map((m) =>
-              m.nombre === "Nat. Fabián Ochoa Palau" ? (
-                <KirbyEasterEgg key={m.nombre} nombre={m.nombre} cargo={m.cargo} especialidad={m.especialidad} foto={m.foto} objPos={m.objPos} zoom={m.zoom} />
-              ) : (
-                <div
-                  key={m.nombre}
-                  className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                >
-                  <div className="relative h-72 overflow-hidden">
-                    <Image
-                      src={m.foto}
-                      alt={m.nombre}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      style={{
-                        objectPosition: m.objPos,
-                        transform: `scale(${m.zoom})`,
-                        transformOrigin: "center top",
-                      }}
-                    />
-                  </div>
-                  <div className="border-t-2 border-brand-orange p-5">
-                    <p className="font-black text-ser-gray">{m.nombre}</p>
-                    <p className="mt-0.5 text-sm font-semibold text-brand-orange">{m.cargo}</p>
-                    <p className="mt-2 text-xs leading-relaxed text-ser-gray/60">{m.especialidad}</p>
-                  </div>
+            ].map((m) => (
+              <div
+                key={m.nombre}
+                className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              >
+                <div className="relative h-72 overflow-hidden">
+                  <Image
+                    src={m.foto}
+                    alt={m.nombre}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      objectPosition: m.objPos,
+                      transform: `scale(${m.zoom})`,
+                      transformOrigin: "center top",
+                    }}
+                  />
                 </div>
-              )
-            )}
+                <div className="border-t-2 border-brand-orange p-5">
+                  <p className="font-black text-ser-gray">{m.nombre}</p>
+                  <p className="mt-0.5 text-sm font-semibold text-brand-orange">{m.cargo}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-ser-gray/60">{m.especialidad}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

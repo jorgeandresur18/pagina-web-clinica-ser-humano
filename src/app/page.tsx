@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Activity, AlertTriangle, Brain, ChevronLeft, ChevronRight, Clock, CloudRain,
@@ -230,100 +230,8 @@ const fadeUp = {
   transition: { duration: 0.45, ease: "easeOut" as const },
 };
 
-// ── Easter egg: juego NES embebido desde Internet Archive ────────────────────
-function NesGameModal({ onClose }: { onClose: () => void }) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  useEffect(() => {
-    const t = setTimeout(() => iframeRef.current?.focus(), 300);
-    return () => clearTimeout(t);
-  }, []);
-
-  return (
-    <div
-      className="fixed inset-0 z-[300] flex flex-col md:items-center md:justify-center md:p-3"
-      style={{ background: "rgba(0,0,0,0.92)" }}
-      onClick={onClose}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="flex flex-col w-full h-full md:h-auto md:max-w-[620px] md:rounded-md overflow-hidden"
-        style={{ background: "#111", fontFamily: "'Courier New', monospace" }}
-      >
-        {/* Barra de título */}
-        <div style={{ background: "#1c1c1c", padding: "8px 14px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #333", flexShrink: 0 }}>
-          <span style={{ color: "#FFF", fontSize: 13, letterSpacing: "0.08em" }}>
-            🎮 &nbsp;SUPER MARIO BROS — NES
-          </span>
-          <button
-            onClick={onClose}
-            style={{ color: "#AAA", background: "none", border: "none", fontSize: 20, cursor: "pointer", lineHeight: 1, padding: "0 2px" }}
-            aria-label="Cerrar"
-          >
-            ✕
-          </button>
-        </div>
-
-        {/* Juego — flex-1 en móvil para llenar la pantalla, altura fija en desktop */}
-        <iframe
-          ref={iframeRef}
-          src="/games/mario.html"
-          className="w-full flex-1 md:flex-none md:h-[420px] block"
-          style={{ border: "none", background: "#000" }}
-          allowFullScreen
-          title="Super Mario Bros NES"
-          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-downloads"
-        />
-
-        {/* Controles — solo desktop */}
-        <div
-          className="hidden md:flex items-center justify-center gap-5 px-4 py-3 flex-shrink-0"
-          style={{ background: "#181818", borderTop: "1px solid #2a2a2a" }}
-        >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-            <div style={{ display: "flex" }}>
-              <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>↑</span>
-            </div>
-            <div style={{ display: "flex", gap: 2 }}>
-              {["←","↓","→"].map(k => (
-                <span key={k} style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
-              ))}
-            </div>
-          </div>
-          <span style={{ fontSize: 9, color: "#555", letterSpacing: "0.1em" }}>MOVER</span>
-          <span style={{ display: "block", width: 1, height: 30, background: "#333", flexShrink: 0 }} />
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            {[["Z","B"],["X","A"]].map(([k,l]) => (
-              <span key={k} style={{ display:"flex", alignItems:"center", gap:4 }}>
-                <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 7px", fontSize:11, color:"#fff", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
-                <span style={{ fontSize:10, color:"#888" }}>{l}</span>
-              </span>
-            ))}
-          </div>
-          <span style={{ display: "block", width: 1, height: 30, background: "#333", flexShrink: 0 }} />
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            {[["Enter","Start"],["Bksp","Sel"]].map(([k,l]) => (
-              <span key={k} style={{ display:"flex", alignItems:"center", gap:4 }}>
-                <span style={{ display:"inline-block", background:"#2a2a2a", border:"1px solid #444", borderBottom:"2px solid #555", borderRadius:3, padding:"2px 4px", fontSize:10, color:"#ccc", fontFamily:"monospace", lineHeight:1.4 }}>{k}</span>
-                <span style={{ fontSize:10, color:"#888" }}>{l}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function Home() {
-  const [nadiaCount, setNadiaCount] = useState(0);
-  const [nesOpen, setNesOpen]       = useState(false);
-
-  const NADIA_SILENT = 29;
-  const NADIA_TOTAL  = 40;
-  const nadiaCountdown = nadiaCount > NADIA_SILENT ? NADIA_TOTAL - nadiaCount : null;
-  const showNadiaBall  = nadiaCountdown !== null && nadiaCountdown > 0;
-
   return (
     <>
       {/* SECCIÓN 1 — HERO */}
@@ -586,18 +494,7 @@ export default function Home() {
                   alt={persona.nombre}
                   width={224}
                   height={224}
-                  className={`h-28 w-28 rounded-full object-cover object-top${persona.nombre === "Dra. Nadia Donadonibus" ? " cursor-pointer select-none" : ""}`}
-                  onClick={
-                    persona.nombre === "Dra. Nadia Donadonibus"
-                      ? () => {
-                          setNadiaCount((n) => {
-                            const next = n + 1;
-                            if (next >= NADIA_TOTAL) { setNesOpen(true); return 0; }
-                            return next;
-                          });
-                        }
-                      : undefined
-                  }
+                  className="h-28 w-28 rounded-full object-cover object-top"
                 />
                 <h3 className="mt-4 text-lg font-medium text-brand-gray-dark">{persona.nombre}</h3>
                 <p className="text-sm font-medium text-brand-orange">{persona.cargo}</p>
@@ -689,25 +586,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Bola countdown Nadia — misma animación que el Easter egg del logo */}
-      <AnimatePresence>
-        {showNadiaBall && (
-          <motion.div
-            key={nadiaCountdown}
-            initial={{ scale: 1.4, opacity: 0 }}
-            animate={{ scale: 1,   opacity: 1 }}
-            exit={{ scale: 0.6,    opacity: 0 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="fixed inset-0 z-[290] flex items-center justify-center pointer-events-none"
-          >
-            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-brand-orange shadow-2xl">
-              <span className="text-4xl font-black text-white">{nadiaCountdown}</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {nesOpen && <NesGameModal onClose={() => setNesOpen(false)} />}
     </>
   );
 }

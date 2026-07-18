@@ -1,6 +1,5 @@
 ﻿import Image from "next/image";
 import AnimatedStats from "@/components/ui/AnimatedStats";
-import ZeldaEasterEgg from "@/components/ui/ZeldaEasterEgg";
 import {
   Brain, Wind, Clock, BookOpen, Network, Heart, Flame, Target,
   Zap, Shield, Activity, ArrowRight, Users,
@@ -315,27 +314,23 @@ export default function NeuroniPage() {
             </h2>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 max-w-2xl mx-auto">
-            {EQUIPO.map((m) =>
-              m.nombre === "Dra. Sara Ochoa" ? (
-                <ZeldaEasterEgg key={m.nombre} nombre={m.nombre} cargo={m.cargo} foto={m.foto} objPos={m.objPos} />
-              ) : (
-                <div key={m.nombre} className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                  <div className="relative h-72 overflow-hidden">
-                    <Image
-                      src={m.foto}
-                      alt={m.nombre}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      style={{ objectPosition: m.objPos }}
-                    />
-                  </div>
-                  <div className="p-5">
-                    <p className="font-black text-[#4f5571]">{m.nombre}</p>
-                    <p className="mt-1 text-sm text-[#566597]">{m.cargo}</p>
-                  </div>
+            {EQUIPO.map((m) => (
+              <div key={m.nombre} className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                <div className="relative h-72 overflow-hidden">
+                  <Image
+                    src={m.foto}
+                    alt={m.nombre}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{ objectPosition: m.objPos }}
+                  />
                 </div>
-              )
-            )}
+                <div className="p-5">
+                  <p className="font-black text-[#4f5571]">{m.nombre}</p>
+                  <p className="mt-1 text-sm text-[#566597]">{m.cargo}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
